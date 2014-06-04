@@ -4,7 +4,7 @@ class CreateAssignments < ActiveRecord::Migration
       t.text :title
       t.text :body
       t.datetime :deadline
-      t.decimal :max_grade
+      t.float :max_grade
 
       t.timestamps
     end

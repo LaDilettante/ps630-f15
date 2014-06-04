@@ -11,5 +11,6 @@ FactoryGirl.define do
   factory :assignment do
     sequence(:title) { |n| "Assignment #{n} title" }
     sequence(:body) { |n| "Assignment #{n} body" }
+    deadline Time.now
   end
 end

@@ -5,7 +5,7 @@ class CreateHomeworkDocuments < ActiveRecord::Migration
       t.integer :submitter_id
       t.integer :assignment_id
       t.text :content
-      t.decimal :grade
+      t.float :grade
 
       t.timestamps
     end
