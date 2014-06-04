@@ -1,5 +1,9 @@
 require 'spec_helper'
 
 describe Assignment do
-  pending "add some examples to (or delete) #{__FILE__}"
+  before { @assignment = FactoryGirl.create(:assignment) }
+  subject { @assignment }
+
+  it { should respond_to :deadline }
+  it { should respond_to :homework_documents }
 end
