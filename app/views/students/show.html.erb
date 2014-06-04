@@ -21,4 +21,4 @@ Student's submissions:
   <% end %>
 </ul>
 
-Submit new homework here: <%= link_to '#' %>
+<%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id) %>

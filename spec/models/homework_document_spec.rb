@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe HomeworkDocument do
-  let(:assignment) { FactoryGirl.create(:assignment) }
-  let(:hw) { assignment.homework_documents.create }
+  let(:assignment) { FactoryGirl.build(:assignment) }
+  let(:hw) { assignment.homework_documents.new(submitter_id: 1) }
 
   subject { hw }
 
@@ -14,6 +14,11 @@ describe HomeworkDocument do
 
   describe "must have an associated assignment" do
     before { hw.assignment = nil }
+    it { should be_invalid }
+  end
+
+  describe "must have an associated submitter" do
+    before { hw.submitter_id = nil }
     it { should be_invalid }
   end
 
