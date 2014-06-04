@@ -3,7 +3,7 @@ class HomeworkDocument < ActiveRecord::Base
   belongs_to :submitter, class_name: "Student"
   belongs_to :assignment
 
-  after_save :calculate_penalty
+  before_save :calculate_penalty
 
   validates :assignment, presence: true
 

@@ -5,12 +5,12 @@ FactoryGirl.define do
   end
 
   factory :homework_document do
-    content Faker::Lorem.sentence(2)
+    content Faker::Lorem.sentence(3)
   end
 
   factory :assignment do
     sequence(:title) { |n| "Assignment #{n} title" }
     sequence(:body) { |n| "Assignment #{n} body" }
-    deadline Time.now
+    sequence(:deadline) { |n| n.weeks.ago }
   end
 end

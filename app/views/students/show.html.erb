@@ -1,0 +1,24 @@
+<h1>Profile page</h1>
+
+Student profile:
+<ul>
+  <li>Name: <%= @student.name %></li>
+  <li>Email: <%= @student.email %></li>
+</ul>
+
+Student's submissions:
+<ul>
+  <% @submissions.each do |submission| %>
+    <li>
+      <ul>
+      <li>ID: <%= submission.id %></li>
+      <li>Date of submission: <%= submission.created_at %></li>
+      <li>Deadline: <%= submission.assignment.deadline %></li>
+      <li>Grade: <%= submission.grade %>, Penalty <%= submission.penalty %></li>
+      <li>Content: <%= submission.content %></li>
+      </ul>
+    </li>
+  <% end %>
+</ul>
+
+Submit new homework here: <%= link_to '#' %>
