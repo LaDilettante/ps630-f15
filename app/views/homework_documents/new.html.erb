@@ -4,6 +4,7 @@
   
   <!-- student_id is passed along due to nested route -->
   <%#= f.hidden_field :student_id, student_id %>
+  <%= f.label :assignment_id %>
   <%= f.select :assignment_id, @assignment_options %>
 
   <%= f.label :content %>

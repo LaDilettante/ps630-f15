@@ -1,5 +1,3 @@
-<h1>Profile page</h1>
-
 Student profile:
 <ul>
   <li>Name: <%= @student.name %></li>
@@ -8,7 +6,7 @@ Student profile:
 
 Student's submissions:
 <ul>
-  <% @submissions.each do |submission| %>
+  <% @student.submitted_homework_documents.each do |submission| %>
     <li>
       <ul>
       <li>ID: <%= submission.id %></li>

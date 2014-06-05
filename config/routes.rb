@@ -2,10 +2,11 @@ TAApp::Application.routes.draw do
   root 'static_pages#home'
 
   get 'home' => 'static_pages#home'
-  get 'signin' => 'static_pages#signin'
-  get 'signup' => 'static_pages#signup'
+  get 'signup' => 'users#new'
 
-  resources :students do
+  resources :users
+
+  resources :students, controller: 'users', only: [:show] do
     resources :homework_documents, only: [:new, :create]
   end
   # The priority is based upon order of creation: first created -> highest priority.
