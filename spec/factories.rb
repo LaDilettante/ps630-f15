@@ -1,6 +1,11 @@
 FactoryGirl.define do
+  factory :user do
+    sequence(:name) { |n| "User #{n}"}
+    sequence(:email) { |n| "user_#{n}@example.com" }
+  end
+
   factory :student do
-    sequence(:name) { |n| "Student #{n}"}
+    sequence(:name) { |n| "Student #{n}" }
     sequence(:email) { |n| "student_#{n}@example.com" }
   end
 

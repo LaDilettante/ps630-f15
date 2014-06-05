@@ -1,4 +1,10 @@
 TAApp::Application.routes.draw do
+  root 'static_pages#home'
+
+  get 'home' => 'static_pages#home'
+  get 'signin' => 'static_pages#signin'
+  get 'signup' => 'static_pages#signup'
+
   resources :students do
     resources :homework_documents, only: [:new, :create]
   end
