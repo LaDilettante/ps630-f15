@@ -12,6 +12,8 @@ TAApp::Application.routes.draw do
     resources :homework_documents, only: [:new, :create]
   end
 
+  resources :teachers, controller: 'users', only: [:show]
+
   resources :sessions, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

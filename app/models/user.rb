@@ -19,6 +19,14 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(raw_token.to_s)
   end
 
+  def student?
+    type == "Student"
+  end
+
+  def teacher?
+    type == "Teacher"
+  end
+
   private
 
     def create_hashed_token

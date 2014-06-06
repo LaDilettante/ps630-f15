@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "SignupPages" do
+describe "SignupPage" do
 
   before { visit signup_path }
   subject { page }

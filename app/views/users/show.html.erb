@@ -1,8 +1,12 @@
+<% provide(:title, "Profile") %>
 <h1>Profile page</h1>
 
 <% if signed_in? %>
   <%= link_to "Sign out", signout_path, method: 'delete' %>
-  Name of current user: <%= current_user.name %>
+<% end %>
+
+<% if current_user?(@user) || current_user.teacher? %>
+  <%= link_to "Edit your profile", edit_user_path(@user) %>
 <% end %>
 
 

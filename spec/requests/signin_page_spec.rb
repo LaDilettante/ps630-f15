@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe "AuthenticationPages" do
+describe "SigninPage" do
   let(:user) { FactoryGirl.create(:user, email: "foo@bar.com",
                                      password: "foobar",
                                      password_confirmation: "foobar") }
@@ -32,7 +32,6 @@ describe "AuthenticationPages" do
         it { should have_content 'Profile' }
         it { should_not have_link signin_path }
         it { should have_link "Sign out", href: signout_path }
-        it { should have_content "Name of current user" }
       end
 
       describe "can then sign out" do

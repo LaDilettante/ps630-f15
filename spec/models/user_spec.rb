@@ -13,6 +13,13 @@ describe User do
   it { should respond_to :password_confirmation }
   it { should respond_to :authenticate }
 
+  describe "type differentiation" do
+    let(:student) { FactoryGirl.create(:student) }
+    let(:teacher) { FactoryGirl.create(:teacher) }
+    specify { expect(student.student?).to eq true }
+    specify { expect(teacher.teacher?).to eq true }
+  end
+
   describe "authentication" do
     
     describe "password must be present" do
