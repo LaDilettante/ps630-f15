@@ -1,5 +1,12 @@
 <h1>Profile page</h1>
 
+<% if signed_in? %>
+  <%= link_to "Sign out", signout_path, method: 'delete' %>
+  Name of current user: <%= current_user.name %>
+<% end %>
+
+
+
 <% if @user.type == 'Student' %>
   <% @student = @user %>
   <%= render 'student' %>

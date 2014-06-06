@@ -17,6 +17,10 @@ describe "SignupPages" do
       click_button "Sign up"
     end
 
+    # it "should save that student" do
+    #   expect( click_button "Sign up").to change(Student, :count).by(1)
+    # end
+
     describe "saves that student to the database" do
       specify { expect(Student.where(name: "abc", email: "abc@example.com")).to exist }
     end
