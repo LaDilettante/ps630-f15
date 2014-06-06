@@ -35,7 +35,7 @@ describe "AuthenticationPages" do
         it { should have_content "Name of current user" }
       end
 
-      describe "can thens sign out" do
+      describe "can then sign out" do
         before { click_link "Sign out" }
         it { should have_title "Home" }
       end
