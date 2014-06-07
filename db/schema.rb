@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140605195031) do
+ActiveRecord::Schema.define(version: 20140606205943) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -20,6 +20,7 @@ ActiveRecord::Schema.define(version: 20140605195031) do
     t.float    "max_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "graded"
   end
 
   create_table "homework_documents", force: true do |t|

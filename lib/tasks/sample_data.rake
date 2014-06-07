@@ -1,6 +1,6 @@
 namespace :db do
   desc "Fill database with sample data"
-  task populate: :environment do
+  task :populate => :environment do
     FactoryGirl.create(:teacher, name: "teacher", email: "teacher@teacher.com")
     FactoryGirl.create(:student, name: "student", email: "student@student.com")
     5.times { FactoryGirl.create(:student) }

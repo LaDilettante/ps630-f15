@@ -3,7 +3,7 @@ class HomeworkDocument < ActiveRecord::Base
   belongs_to :submitter, class_name: "Student"
   belongs_to :assignment
 
-  after_save :calculate_penalty
+  after_create :calculate_penalty
 
   validates :assignment_id, presence: true
   validates :submitter_id, presence: true
@@ -22,5 +22,6 @@ class HomeworkDocument < ActiveRecord::Base
         # Get a 0 when late for more than a day
         self.penalty = 1
       end
+      save
     end
 end

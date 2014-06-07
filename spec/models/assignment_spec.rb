@@ -6,9 +6,39 @@ describe Assignment do
 
   it { should respond_to :deadline }
   it { should respond_to :homework_documents }
+  it { should respond_to :grader }
 
   describe "must have a deadline" do
     before { assignment.deadline = nil }
     it { should be_invalid }
+  end
+
+  describe "can be listed as" do
+    let(:closed) { FactoryGirl.create(:assignment, deadline: 25.hours.ago) }
+    let(:open) { FactoryGirl.create(:assignment, deadline: 23.hours.ago) }
+
+    describe "closed if past deadline for more than a day" do
+      specify { expect(Assignment.closed).to include(closed) }
+      specify { expect(Assignment.closed).not_to include(open) }
+    end
+
+    describe "open if not past deadline for more than a day" do
+      specify { expect(Assignment.open).not_to include(closed) }
+      specify { expect(Assignment.open).to include(open) }
+    end
+  end
+
+  describe "must have a pool of grader" do
+    let(:submitter) { FactoryGirl.create(:student) }
+    before { submitter.submitted_homework_documents.create(assignment_id: assignment.id) }
+    let(:non_submitter) { FactoryGirl.create(:student) }
+
+    describe "that includes those who submitted" do
+      its(:grader) { should include submitter }
+    end
+
+    describe "that does not include those who didn't submit" do
+      its(:grader) { should_not include non_submitter }
+    end
   end
 end

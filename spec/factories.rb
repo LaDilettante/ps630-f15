@@ -4,18 +4,21 @@ FactoryGirl.define do
     sequence(:email) { |n| "user_#{n}@example.com" }
     password "foobar"
     password_confirmation "foobar"
+  end
 
-    factory :student do
-      type "Student"
-      sequence(:name)  { |n| "Student #{n}" }
-      sequence(:email) { |n| "student_#{n}@example.com" }
-    end
 
-    factory :teacher do
-      type "Teacher"
-      sequence(:name)  { |n| "Teacher #{n}" }
-      sequence(:email) { |n| "teacher_#{n}@example.com" }
-    end
+  factory :student do
+    sequence(:name)  { |n| "Student #{n}" }
+    sequence(:email) { |n| "student_#{n}@example.com" }
+    password "foobar"
+    password_confirmation "foobar"
+  end
+
+  factory :teacher do
+    sequence(:name)  { |n| "Teacher #{n}" }
+    sequence(:email) { |n| "teacher_#{n}@example.com" }
+    password "foobar"
+    password_confirmation "foobar"
   end
 
   factory :homework_document do
@@ -26,5 +29,6 @@ FactoryGirl.define do
     sequence(:title) { |n| "Assignment #{n} title" }
     sequence(:body) { |n| "Assignment #{n} body" }
     sequence(:deadline) { |n| n.weeks.ago }
+    sequence(:graded) { |n| n % 2 == 0 }
   end
 end

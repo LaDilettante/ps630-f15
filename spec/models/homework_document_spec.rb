@@ -28,7 +28,8 @@ describe HomeworkDocument do
         assignment.update_attributes(deadline: Time.now)
         hw.update_attributes(created_at: 2.hours.ago)
       end
-      its(:penalty) { should eq 0 }
+      
+      specify { expect(hw.reload.penalty).to eq 0 }
     end
 
     describe "late submission within a day" do
@@ -36,7 +37,8 @@ describe HomeworkDocument do
         assignment.update_attributes(deadline: Time.now)
         hw.update_attributes(created_at: 5.hours.from_now)
       end
-      its(:penalty) { should eq 0.1 }
+
+      specify { expect(hw.reload.penalty).to eq 0.1 }
     end
 
     describe "late submission more than a day" do
@@ -44,7 +46,8 @@ describe HomeworkDocument do
         assignment.update_attributes(deadline: Time.now)
         hw.update_attributes(created_at: 2.days.from_now)
       end
-      its(:penalty) { should eq 1 }
+
+      specify { expect(hw.reload.penalty).to eq 1 }
     end
   end
 end
