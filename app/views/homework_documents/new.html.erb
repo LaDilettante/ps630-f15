@@ -1,6 +1,6 @@
 <h1>Submit your homework</h1>
 
-<%= form_for @doc, url: student_homework_documents_path(student_id: @doc.submitter_id) do |f| %>
+<%= form_for @doc, url: student_homework_documents_path(student_id: @doc.submitter_id), :html => { :multipart => true } do |f| %>
   
   <!-- student_id is passed along due to nested route -->
   <%#= f.hidden_field :student_id, student_id %>
@@ -9,6 +9,9 @@
 
   <%= f.label :content %>
   <%= f.text_area :content %>
+
+  <%= f.label :ungraded_file %>
+  <%= f.file_field :ungraded_file %>
 
   <%= f.submit "Submit homework" %>
 <% end %>

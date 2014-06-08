@@ -10,7 +10,8 @@ namespace :db do
         student.submitted_homework_documents.create(
           content: Faker::Lorem.sentence(2),
           assignment_id: assignment.id,
-          created_at: rand(-1.month..1.month).ago)
+          created_at: rand(-1.month..1.month).ago,
+          ungraded_file: File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf") )
       end
     end
   end

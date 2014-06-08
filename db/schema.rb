@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140606205943) do
+ActiveRecord::Schema.define(version: 20140608042127) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -32,6 +32,14 @@ ActiveRecord::Schema.define(version: 20140606205943) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.float    "penalty"
+    t.string   "ungraded_file_file_name"
+    t.string   "ungraded_file_content_type"
+    t.integer  "ungraded_file_file_size"
+    t.datetime "ungraded_file_updated_at"
+    t.string   "graded_file_file_name"
+    t.string   "graded_file_content_type"
+    t.integer  "graded_file_file_size"
+    t.datetime "graded_file_updated_at"
   end
 
   create_table "users", force: true do |t|

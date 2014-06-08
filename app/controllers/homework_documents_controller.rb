@@ -17,9 +17,27 @@ class HomeworkDocumentsController < ApplicationController
     end
   end
 
+  def edit
+    @doc = HomeworkDocument.find(params[:id])
+  end
+
+  def update
+    @doc = HomeworkDocument.find(params[:id])
+    if @doc.update_attributes(doc_params)
+      flash[:success] = "Grading submitted"
+      redirect_to User.find(@doc.grader_id)
+    else
+      flash[:error] = "Grading was not submitted"
+      render :edit
+    end
+  end
+
   private
 
     def doc_params
-      params.require(:homework_document).permit(:assignment_id, :content)
+      params.require(:homework_document).permit(:assignment_id, 
+                                                :content, :grade,
+                                                :ungraded_file,
+                                                :graded_file)
     end
 end

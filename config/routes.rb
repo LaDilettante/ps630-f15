@@ -9,7 +9,7 @@ TAApp::Application.routes.draw do
   resources :users
 
   resources :students, controller: 'users', only: [:show] do
-    resources :homework_documents, only: [:new, :create]
+    resources :homework_documents, only: [:new, :create, :edit, :update]
   end
 
   resources :teachers, controller: 'users', only: [:show]

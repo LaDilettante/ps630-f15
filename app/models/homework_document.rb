@@ -2,12 +2,24 @@ class HomeworkDocument < ActiveRecord::Base
   belongs_to :grader, class_name: "Student"
   belongs_to :submitter, class_name: "Student"
   belongs_to :assignment
+  has_attached_file :ungraded_file
+  has_attached_file :graded_file
 
   after_create :calculate_penalty
 
   validates :assignment_id, presence: true
   validates :submitter_id, presence: true
+  validates :grade, numericality: true, allow_nil: true
 
+  validates_attachment :ungraded_file, presence: true,
+    content_type: { content_type: ["application/pdf"] ,
+                    message: "only msword, pdf, tex files" },
+    size: { in: 0..10.megabytes }
+
+  validates_attachment :graded_file, 
+    size: { in: 0..10.megabytes },
+    content_type: { content_type: "/^application\/(msword|pdf|x-tex)/" ,
+                     message: "only msword, pdf, tex files" }
   private
 
     def calculate_penalty

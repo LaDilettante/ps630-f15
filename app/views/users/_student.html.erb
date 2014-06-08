@@ -14,9 +14,41 @@ Student's submissions:
       <li>Deadline: <%= submission.assignment.deadline %></li>
       <li>Grade: <%= submission.grade %>, Penalty <%= submission.penalty %></li>
       <li>Content: <%= submission.content %></li>
+      <li>
+      <% unless submission.ungraded_file.nil? %>
+        <%= link_to "Ungraded submission", submission.ungraded_file.url %>
+      <% end %>
+      </li>
       </ul>
     </li>
   <% end %>
 </ul>
 
 <%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id) %>
+
+Student's grading:
+<ul>
+  <li>Finished
+    <ul>
+      <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
+        <li><%= graded_doc.assignment.title %></li>
+        <li><%= graded_doc.grade %></li>
+        <li><%= link_to "Graded file", graded_doc.graded_file.url %></li>
+      <% end %>
+    </ul>
+  </li>
+
+  <li>Unfinished
+    <ul>
+      <% @student.returned_homework_documents.where("grade is NULL").each do |ungraded_doc| %>
+        <li><%= ungraded_doc.assignment.title %></li>
+        <li><%= ungraded_doc.grade %></li>
+        <li><%= link_to "Ungraded file", ungraded_doc.ungraded_file.url %></li>
+        <li><%= link_to "Submit your grading here", edit_student_homework_document_path(student_id: ungraded_doc.submitter_id, id: ungraded_doc.id) %></li>
+      <% end %>
+    </ul>
+  </li>
+</ul>
+
+
+
