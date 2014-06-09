@@ -12,10 +12,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem "paperclip", "~> 4.1"
 gem 'whenever', :require => false
 
-group :development, :test do
-  gem 'sqlite3', '1.3.8'
-  gem 'rspec-rails', '2.13.1'
-  gem 'factory_girl_rails', '4.2.1'
+group :development do
+  gem "letter_opener"
 end
 
 group :test do
@@ -23,6 +21,12 @@ group :test do
   gem 'capybara', '2.1.0'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
+end
+
+group :development, :test do
+  gem 'sqlite3', '1.3.8'
+  gem 'rspec-rails', '2.13.1'
+  gem 'factory_girl_rails', '4.2.1'
 end
 
 gem 'sass-rails', '4.0.1'

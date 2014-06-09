@@ -1,0 +1,9 @@
+Hi there, <%= @submitter.name %>
+========================================
+
+Your grade for Assignment <%= @assignment.id %>, "<%= @assignment.title %>", is
+<%= @doc.grade %>.
+    
+You can see your graded homework at <%= link_to "your profile page", user_path(@submitter) %>. 
+
+Have a great day!

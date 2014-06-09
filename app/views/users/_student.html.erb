@@ -19,6 +19,11 @@ Student's submissions:
         <%= link_to "Ungraded submission", submission.ungraded_file.url %>
       <% end %>
       </li>
+      <li>
+      <% unless submission.graded_file.nil? %>
+        <%= link_to "Graded submission", submission.graded_file.url %>
+      <% end %>
+      </li>
       </ul>
     </li>
   <% end %>
@@ -49,6 +54,3 @@ Student's grading:
     </ul>
   </li>
 </ul>
-
-
-

@@ -25,6 +25,7 @@ class HomeworkDocumentsController < ApplicationController
     @doc = HomeworkDocument.find(params[:id])
     if @doc.update_attributes(doc_params)
       flash[:success] = "Grading submitted"
+      SubmitterMailer.notify_available_grade(User.find(@doc.submitter_id), @doc)
       redirect_to User.find(@doc.grader_id)
     else
       flash[:error] = "Grading was not submitted"

@@ -23,6 +23,7 @@ FactoryGirl.define do
 
   factory :homework_document do
     content Faker::Lorem.sentence(3)
+    ungraded_file File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf")
   end
 
   factory :assignment do

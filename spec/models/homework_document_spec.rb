@@ -2,7 +2,10 @@ require 'spec_helper'
 
 describe HomeworkDocument do
   let(:assignment) { FactoryGirl.build(:assignment) }
-  let(:hw) { assignment.homework_documents.new(submitter_id: 1) }
+  let(:hw) do 
+    assignment.homework_documents.new(submitter_id: 1, 
+      ungraded_file: File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf"))
+  end
 
   subject { hw }
 
