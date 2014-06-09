@@ -12,6 +12,8 @@ gem 'bootstrap-will_paginate', '0.0.9'
 gem "paperclip", "~> 4.1"
 gem 'whenever', :require => false
 
+gem 'factory_girl_rails', '4.2.1'
+
 group :development do
   gem "letter_opener"
 end
@@ -21,7 +23,6 @@ group :test do
   gem 'capybara', '2.1.0'
   gem 'cucumber-rails', '1.4.0', :require => false
   gem 'database_cleaner', github: 'bmabey/database_cleaner'
-  gem 'factory_girl_rails', '4.2.1'
 end
 
 group :development, :test do
