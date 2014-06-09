@@ -1,56 +1,61 @@
-Student profile:
-<ul>
-  <li>Name: <%= @student.name %></li>
-  <li>Email: <%= @student.email %></li>
-</ul>
-
-Student's submissions:
-<ul>
+<div class="span12">
+<h3>Student's submissions:</h3>
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Assignment title</th>
+    <th scope="col">Submission date</th>
+    <th scope="col">Deadline</th>
+    <th scope="col">Grade / Penalty</th>
+    <th scope="col">Content</th>
+  </tr>
   <% @student.submitted_homework_documents.each do |submission| %>
-    <li>
-      <ul>
-      <li>ID: <%= submission.id %></li>
-      <li>Date of submission: <%= submission.created_at %></li>
-      <li>Deadline: <%= submission.assignment.deadline %></li>
-      <li>Grade: <%= submission.grade %>, Penalty <%= submission.penalty %></li>
-      <li>Content: <%= submission.content %></li>
-      <li>
-      <% unless submission.ungraded_file.nil? %>
-        <%= link_to "Ungraded submission", submission.ungraded_file.url %>
-      <% end %>
-      </li>
-      <li>
-      <% unless submission.graded_file.nil? %>
-        <%= link_to "Graded submission", submission.graded_file.url %>
-      <% end %>
-      </li>
-      </ul>
-    </li>
+    <tr>
+      <td><%= submission.assignment.title %></td>
+      <td><%= submission.created_at %></td>
+      <td><%= submission.assignment.deadline %></td>
+      <td><%= submission.grade %>, <%= submission.penalty %></td>
+      <td><%= submission.content %></td>
+      <td>
+        <% unless submission.ungraded_file.nil? %>
+          <%= link_to "Ungraded submission", submission.ungraded_file.url %>
+        <% end %>
+      </td>
+      <td>
+        <% unless submission.graded_file.nil? || submission.grade.nil? %>
+          <%= link_to "Graded submission", submission.graded_file.url %>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
-</ul>
+</table>
 
-<%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id) %>
+<%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id), class: "btn" %>
 
-Student's grading:
-<ul>
-  <li>Finished
-    <ul>
-      <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
-        <li><%= graded_doc.assignment.title %></li>
-        <li><%= graded_doc.grade %></li>
-        <li><%= link_to "Graded file", graded_doc.graded_file.url %></li>
-      <% end %>
-    </ul>
+<h3>Student's grading:</h3>
+
+<h4>Finished</h4>
+<table class="table table-hover">
+  <tr>
+    <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
+      <td><%= graded_doc.assignment.title %></td>
+      <td><%= graded_doc.grade %></td>
+      <td><%= link_to "Graded file", graded_doc.graded_file.url %></td>
+    <% end %>
+  </tr>
   </li>
+</table>
 
-  <li>Unfinished
-    <ul>
-      <% @student.returned_homework_documents.where("grade is NULL").each do |ungraded_doc| %>
-        <li><%= ungraded_doc.assignment.title %></li>
-        <li><%= ungraded_doc.grade %></li>
-        <li><%= link_to "Ungraded file", ungraded_doc.ungraded_file.url %></li>
-        <li><%= link_to "Submit your grading here", edit_student_homework_document_path(student_id: ungraded_doc.submitter_id, id: ungraded_doc.id) %></li>
-      <% end %>
-    </ul>
-  </li>
-</ul>
+<h4>Unfinished</h4>
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Assignment title</th>
+  </tr>
+  <% @student.returned_homework_documents.where("grade is NULL").each do |ungraded_doc| %>
+    <tr>
+      <td><%= ungraded_doc.assignment.title %></td>
+      <td><%= link_to "Ungraded file", ungraded_doc.ungraded_file.url %></td>
+      <td><%= link_to "Grade", edit_student_homework_document_path(student_id: ungraded_doc.submitter_id, id: ungraded_doc.id), class: "btn" %></td>
+    </tr>
+  <% end %>
+</table>
+</div>
