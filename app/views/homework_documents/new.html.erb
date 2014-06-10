@@ -1,17 +1,21 @@
 <h1>Submit your homework</h1>
 
-<%= form_for @doc, url: student_homework_documents_path(student_id: @doc.submitter_id), :html => { :multipart => true } do |f| %>
-  
-  <!-- student_id is passed along due to nested route -->
-  <%#= f.hidden_field :student_id, student_id %>
-  <%= f.label :assignment_id %>
-  <%= f.select :assignment_id, @assignment_options %>
+<div class="container">
+  <div class="span6">
+    <%= form_for @doc, url: student_homework_documents_path(student_id: @doc.submitter_id), :html => { :multipart => true } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <!-- student_id is passed along due to nested route -->
+      <%#= f.hidden_field :student_id, student_id %>
+      <%= f.label :assignment_id %>
+      <%= f.select :assignment_id, @assignment_options %>
 
-  <%= f.label :content %>
-  <%= f.text_area :content %>
+      <%= f.label :content %>
+      <%= f.text_area :content %>
 
-  <%= f.label :ungraded_file %>
-  <%= f.file_field :ungraded_file %>
+      <%= f.label :ungraded_file %>
+      <%= f.file_field :ungraded_file %>
 
-  <%= f.submit "Submit homework" %>
-<% end %>
+      <%= f.submit "Submit homework", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

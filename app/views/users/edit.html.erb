@@ -2,25 +2,30 @@
 
 <h1>Update your profile</h1>
 
-<%= form_for @user, as: :user, url: user_path(@user.id) do |f| %>
-  
-  <%= f.label :name %>
-  <%= f.text_field :name %>
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for @user, as: :user, url: user_path(@user.id) do |f| %>
+      <%= render 'shared/error_message', object: f.object %>
 
-  <%= f.label :email %>
-  <%= f.text_field :email %>
+      <%= f.label :name %>
+      <%= f.text_field :name %>
 
-  <%= f.label :password %>
-  <%= f.password_field :password %>
+      <%= f.label :email %>
+      <%= f.text_field :email %>
 
-  <%= f.label :password_confirmation %>
-  <%= f.password_field :password_confirmation %>
+      <%= f.label :password %>
+      <%= f.password_field :password %>
 
-  <%= f.submit "Save changes" %>
-<% end %>
+      <%= f.label :password_confirmation, "Confirm password" %>
+      <%= f.password_field :password_confirmation %>
 
-<% if current_user?(@user) || current_user.teacher? %>
-  <h1>Delete your account (careful!)</h1>
-  <%= link_to "delete", user_path(@user), method: "DELETE",
-                                          data: { confirm: "You sure?" } %>
-<% end %>
+      <%= f.submit "Save changes", class: "btn btn-large" %>
+    <% end %>
+
+    <% if current_user?(@user) || current_user.teacher? %>
+      <%= link_to "Delete account (careful!)", user_path(@user), method: "DELETE",
+                                              data: { confirm: "You sure?" },
+                                              class: "btn btn-large btn-danger" %>
+    <% end %>
+  </div>
+</div>
