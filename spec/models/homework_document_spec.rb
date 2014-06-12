@@ -2,8 +2,9 @@ require 'spec_helper'
 
 describe HomeworkDocument do
   let(:assignment) { FactoryGirl.build(:assignment) }
+  let(:submitter) { FactoryGirl.create(:student) }
   let(:hw) do 
-    assignment.homework_documents.new(submitter_id: 1, 
+    submitter.submitted_homework_documents.new(assignment_id: assignment.id, 
       ungraded_file: File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf"))
   end
 
@@ -14,6 +15,8 @@ describe HomeworkDocument do
   it { should respond_to :assignment }
   it { should respond_to :grade }
   it { should respond_to :content }
+  it { should respond_to :ungraded_file }
+  it { should respond_to :graded_file }
 
   describe "must have an associated assignment" do
     before { hw.assignment = nil }
@@ -23,6 +26,16 @@ describe HomeworkDocument do
   describe "must have an associated submitter" do
     before { hw.submitter_id = nil }
     it { should be_invalid }
+  end
+
+  describe "must have an uploaded ungraded file" do
+    before { hw.ungraded_file = nil }
+    it { should be_invalid }
+  end
+
+  describe "must only have uploads of .doc, .pdf, and .tex" do
+    it "is a pending example" do
+    end
   end
 
   describe "submission" do

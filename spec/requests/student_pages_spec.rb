@@ -27,10 +27,10 @@ describe "StudentPages" do
       let(:new_name) { "New name" }
       let(:new_email) { "new_email@example.com" }
       before do
-        fill_in "Name"                 , with: new_name
-        fill_in "Email"                , with: new_email
-        fill_in "Password"             , with: student.password
-        fill_in "Password confirmation", with: student.password
+        fill_in "Name"             , with: new_name
+        fill_in "Email"            , with: new_email
+        fill_in "Password"         , with: student.password
+        fill_in "Confirmation"     , with: student.password
         click_button "Save changes"
       end
 

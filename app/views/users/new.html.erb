@@ -3,7 +3,8 @@
 
 <div class="row">
   <div class="span6 offset3">
-    <%= form_for @user, url: users_path, method: 'POST' do |f| %>
+    <%= form_for @user, as: :user, url: users_path, method: 'POST' do |f| %>
+      <%#= @user.becomes(User) is equivalent with @user, as: :user %>
       <%= render 'shared/error_messages', object: f.object %>
       <%= f.label :type %>
       <%= f.select :type, @type_options %>
@@ -20,7 +21,7 @@
       <%= f.label :password_confirmation, "Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
-      <%= f.submit "Create my account", class: "btn btn-large" %>
+      <%= f.submit "Create account", class: "btn btn-large" %>
     <% end %>
   </div>
 </div>

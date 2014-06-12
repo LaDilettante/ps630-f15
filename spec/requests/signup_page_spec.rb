@@ -13,8 +13,8 @@ describe "SignupPage" do
       fill_in "Name"                 , with: "abc"
       fill_in "Email"                , with: "abc@example.com"
       fill_in "Password"             , with: "foobar"
-      fill_in "Password confirmation", with: "foobar"
-      click_button "Sign up"
+      fill_in "Confirmation", with: "foobar"
+      click_button "Create account"
     end
 
     # it "should save that student" do
@@ -26,14 +26,14 @@ describe "SignupPage" do
     end
 
     describe "redirects to that student profile page" do
-      it { should have_content "Student profile" }
+      it { should have_content "Profile" }
     end
   end
 
   describe "unsuccessful signup of a student" do
     before do
       select "Student", from: "user[type]"
-      click_button "Sign up"
+      click_button "Create account"
     end
 
     describe "pops up a flash error message" do

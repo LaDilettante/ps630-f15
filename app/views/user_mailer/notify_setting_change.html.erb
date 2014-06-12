@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+
+  <body>
+    <h1>Hi <%= @user.email %></h1>
+
+    <p>Your profile setting has recently been changed. If this was not initiated by you, please <%= link_to "let me know", contact_path %> as soon as possible.</p>
+
+    <p>Thank you for using <%= site_title %>.</p>
+  </body>
+</html>

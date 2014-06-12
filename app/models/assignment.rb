@@ -1,5 +1,5 @@
 class Assignment < ActiveRecord::Base
-  has_many :homework_documents
+  has_many :homework_documents, inverse_of: :assignment
   validates :deadline, presence: true
 
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
@@ -13,7 +13,7 @@ class Assignment < ActiveRecord::Base
     Student.where("id IN (#{submitter_ids})", assignment_id: id)
   end
 
-  def self.grade_all
+  def Assignment.grade_all
     closed.ungraded.each do |assignment|
       assignment.assign_homework_doc_to_grader  
     end
@@ -29,7 +29,7 @@ class Assignment < ActiveRecord::Base
     grader_map_to_submitter.each do |grader, submitter|
       doc = submitter.submitted_homework_documents.where(assignment_id: id).last
       doc.update_attribute(:grader_id, grader.id)
-      GraderMailer.notify_pending_grading(grader, self)
+      UserMailer.notify_pending_grading(grader, self).deliver
     end
     update_attribute(:graded, true)
   end

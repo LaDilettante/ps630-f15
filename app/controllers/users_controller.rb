@@ -5,7 +5,7 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @type_options = [['Student', 'Student'], ['Teacher', 'Teacher']]
+    @type_options = type_options
   end
 
   def create
@@ -15,8 +15,9 @@ class UsersController < ApplicationController
       sign_in @user
       redirect_to @user
     else
-      flash[:error] = "Something happened"
-      redirect_to new_user_path
+      flash.now[:error] = "Unable to create your account"
+      @type_options = type_options
+      render :new
     end
   end
 
@@ -63,5 +64,9 @@ class UsersController < ApplicationController
 
     def turn_away_non_teacher
       redirect_to root_path, notice: "You are not allowed to do that" unless current_user.teacher?
+    end
+
+    def type_options
+      [['Student', 'Student'], ['Teacher', 'Teacher']]
     end
 end

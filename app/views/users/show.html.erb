@@ -11,10 +11,10 @@
   </aside>
 </div>
 
-<% if @user.type == 'Student' %>
+<% if @user.student? %>
   <% @student = @user %>
   <%= render 'student' %>
-<% elsif @user.type == 'Teacher' %>
+<% elsif @user.teacher? %>
   <% @teacher = @user %>
   <%= render 'teacher' %>
 <% end %>

@@ -5,7 +5,7 @@
     <th scope="col">Assignment title</th>
     <th scope="col">Submission date</th>
     <th scope="col">Deadline</th>
-    <th scope="col">Grade / Penalty</th>
+    <th scope="col">Grade / Penalty / Final grade</th>
     <th scope="col">Content</th>
   </tr>
   <% @student.submitted_homework_documents.each do |submission| %>
@@ -13,7 +13,7 @@
       <td><%= submission.assignment.title %></td>
       <td><%= submission.created_at %></td>
       <td><%= submission.assignment.deadline %></td>
-      <td><%= submission.grade %>, <%= submission.penalty %></td>
+      <td><%= submission.grade %> / <%= submission.penalty %> / <%= submission.final_grade %></td>
       <td><%= submission.content %></td>
       <td>
         <% unless submission.ungraded_file.nil? %>

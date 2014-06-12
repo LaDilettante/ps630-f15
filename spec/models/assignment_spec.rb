@@ -47,7 +47,7 @@ describe Assignment do
     end
   end
 
-  describe "can assign graders to homework_documents" do
+  describe "can assign graders to homework_documents and" do
     let(:submitter_1) { FactoryGirl.create(:student) }    
     let(:submitter_2) { FactoryGirl.create(:student) }
     let(:submitter_3) { FactoryGirl.create(:student) }
@@ -60,15 +60,27 @@ describe Assignment do
 
     before { assignment.assign_homework_doc_to_grader }
 
-    describe "without a student grading himself" do
-      it "is a pending example"
-      # its("homework_documents.each") do |hw_doc|
-      #   hw_doc.submitter_id should_not eq hw_doc.grader_id
-      # end
+    it "does not have a student grading himself" do
+      assignment.homework_documents.each do |hw_doc| 
+        expect(hw_doc.submitter_id).not_to eq hw_doc.grader_id
+      end
     end
 
-    describe "with every document having a grader" do
-      it "is a pending example"
+    it "has a grader for every document" do
+      assignment.homework_documents.each do |hw_doc|
+        expect(hw_doc.grader_id).not_to be_nil
+      end
+    end
+
+    it "assigns only one document to one grader" do
+      grader_count = Hash.new
+      assignment.homework_documents.each do |hw_doc|
+        grader_count[hw_doc.grader_id] = grader_count.fetch(hw_doc.grader_id, 0) + 1
+      end
+
+      grader_count.each do |grader, count|
+        expect(count).to eq 1
+      end
     end
 
     describe "and be marked as graded afterward" do
