@@ -1,4 +1,6 @@
 <div class="span12">
+<h3>Graph</h3>
+<%= image_tag(url_for(:controller => "users", :action => "show_image")) %>
 <h3>Student's submissions:</h3>
 <table class="table table-hover">
   <tr>
@@ -13,7 +15,7 @@
       <td><%= submission.assignment.title %></td>
       <td><%= submission.created_at %></td>
       <td><%= submission.assignment.deadline %></td>
-      <td><%= submission.grade %> / <%= submission.penalty %> / <%= submission.final_grade %></td>
+      <td><%= submission.grade.nil? ? "NA" : submission.grade %> / <%= submission.penalty %> / <%= submission.grade.nil? ? "NA" : submission.final_grade %></td>
       <td><%= submission.content %></td>
       <td>
         <% unless submission.ungraded_file.nil? %>

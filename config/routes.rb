@@ -11,6 +11,8 @@ TAApp::Application.routes.draw do
 
   resources :users
 
+  get '/users/show_image' => 'users#show_image'
+
   resources :students, controller: 'users', only: [:show] do
     resources :homework_documents, only: [:new, :create, :edit, :update]
   end
