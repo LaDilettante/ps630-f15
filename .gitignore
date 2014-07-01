@@ -17,4 +17,8 @@
 
 *sublime-workspace
 
+# Ignore fake homework file
+*public/*/*.pdf
+
+
 idea-sketching.*
