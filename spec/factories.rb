@@ -29,7 +29,7 @@ FactoryGirl.define do
   factory :assignment do
     sequence(:title) { |n| "Assignment #{n} title" }
     sequence(:body) { |n| "Assignment #{n} body" }
-    sequence(:deadline) { |n| n.weeks.ago }
-    sequence(:graded) { |n| n % 2 == 0 }
+    sequence(:deadline) { |n| 1.year.ago + n.weeks }
+    sequence(:graded) { false }
   end
 end

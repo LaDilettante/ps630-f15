@@ -1,6 +1,9 @@
+<div class="row">
+<%= content_tag "div", id: "grade_bargraph", class: "center", data: {grades: @student.submitted_homework_documents.map(&:grade)} do %>  
+<% end %>
+</div>
+
 <div class="span12">
-<h3>Graph</h3>
-<%= image_tag(url_for(:controller => "users", :action => "show_image")) %>
 <h3>Student's submissions:</h3>
 <table class="table table-hover">
   <tr>
@@ -15,7 +18,7 @@
       <td><%= submission.assignment.title %></td>
       <td><%= submission.created_at %></td>
       <td><%= submission.assignment.deadline %></td>
-      <td><%= submission.grade.nil? ? "NA" : submission.grade %> / <%= submission.penalty %> / <%= submission.grade.nil? ? "NA" : submission.final_grade %></td>
+      <td><%= submission.grade.nil? ? "NA" : "%.1f" % submission.grade %> / <%= "%.2f" % submission.penalty %> / <%= submission.grade.nil? ? "NA" : "%.1f" % submission.final_grade %></td>
       <td><%= submission.content %></td>
       <td>
         <% unless submission.ungraded_file.nil? %>
@@ -38,19 +41,24 @@
 <h4>Finished</h4>
 <table class="table table-hover">
   <tr>
-    <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
+    <th scope="col">Assignment title</th>
+    <th scope="col">Grade</th>
+    <th scope="col">Attachment</th>
+  </tr>
+  <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
+    <tr>
       <td><%= graded_doc.assignment.title %></td>
       <td><%= graded_doc.grade %></td>
       <td><%= link_to "Graded file", graded_doc.graded_file.url %></td>
     <% end %>
   </tr>
-  </li>
 </table>
 
 <h4>Unfinished</h4>
 <table class="table table-hover">
   <tr>
     <th scope="col">Assignment title</th>
+    <th scope="col">Attachment</th>
   </tr>
   <% @student.returned_homework_documents.where("grade is NULL").each do |ungraded_doc| %>
     <tr>
