@@ -32,6 +32,7 @@ $(document).ready(function() {
       .attr("width", xScale.rangeBand())
       .attr("height", function(d) { return margin.top + height - yScale(d); })
       .attr("fill", "steelblue")
+<<<<<<< HEAD
       .on("mouseover", function(d) {
          d3.select(this)
             .attr("fill", "orange");
@@ -52,7 +53,6 @@ $(document).ready(function() {
             .transition()
             .duration(250)
             .attr("fill", "steelblue");
-
          d3.select("#textlabel").remove();
       });
 
