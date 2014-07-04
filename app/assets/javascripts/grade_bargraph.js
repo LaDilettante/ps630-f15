@@ -32,7 +32,6 @@ $(document).ready(function() {
       .attr("width", xScale.rangeBand())
       .attr("height", function(d) { return margin.top + height - yScale(d); })
       .attr("fill", "steelblue")
-<<<<<<< HEAD
       .on("mouseover", function(d) {
          d3.select(this)
             .attr("fill", "orange");
