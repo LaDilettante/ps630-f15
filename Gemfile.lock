@@ -105,6 +105,7 @@ GEM
     minitest (4.7.5)
     multi_json (1.10.1)
     multi_test (0.1.1)
+    newrelic_rpm (3.9.0.229)
     nokogiri (1.6.2.1)
       mini_portile (= 0.6.0)
     paperclip (4.1.1)
@@ -210,6 +211,7 @@ DEPENDENCIES
   jbuilder (= 1.0.2)
   jquery-rails (= 3.0.4)
   letter_opener
+  newrelic_rpm
   paperclip (~> 4.1)
   pg (= 0.15.1)
   rails (= 4.0.5)
