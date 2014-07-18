@@ -27,6 +27,7 @@ TAApp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  ActionMailer::Base.default :from => 'teachingassistant.app@gmail.com'
   # Open email in browser
   config.action_mailer.delivery_method = :letter_opener
 end
