@@ -15,6 +15,8 @@ gem 'whenever', :require => false
 gem 'factory_girl_rails', '4.2.1'
 gem 'd3-rails'
 
+gem 'figaro'
+
 group :development do
   gem "letter_opener"
 end
