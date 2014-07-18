@@ -1,10 +1,10 @@
 <div class="row">
 <%= content_tag "div", id: "grade_bargraph", class: "span6", 
-  data: { finalgrades: @student.submitted_homework_documents.map(&:final_grade) ||= [0] } do %>
+  data: { :finalgrades => @student.submitted_homework_documents.map(&:final_grade) } do %>
 <% end %>
 
 <%= content_tag "div", id: "grade_scatterplot", class: "span6",
-  data: { submissions: 
+  data: { :submissions => 
     @student.submitted_homework_documents.map { 
       |sub| [sub.assignment.title, sub.grade, (sub.assignment.deadline - sub.created_at) / 3600 ] 
     }

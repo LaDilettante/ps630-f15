@@ -37,6 +37,10 @@ class HomeworkDocument < ActiveRecord::Base
   end
 
   def final_grade
-    grade * (1 - penalty)
+    if grade.nil?
+      return nil
+    else
+      return grade * (1 - penalty)
+    end
   end 
 end
