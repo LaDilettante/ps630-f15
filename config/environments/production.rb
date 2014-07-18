@@ -78,11 +78,11 @@ TAApp::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
-  ActionMailer::Base.default :from => 'app27277259@heroku.com'
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default_url_options = { host: "teachingassistant.heroku.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-    :addresses            => 'smtp.sendgrid.net',
+    :address            => 'smtp.sendgrid.net',
     :port                 => '587',
     :authentication       => :plain,
     :user_name            => ENV['SENDGRID_USERNAME'],
