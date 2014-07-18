@@ -78,6 +78,7 @@ TAApp::Application.configure do
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
 
+  ActionMailer::Base.default :from => 'app27277259@heroku.com'
   config.action_mailer.default_url_options = { host: "teachingassistant.heroku.com" }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {

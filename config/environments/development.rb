@@ -27,6 +27,7 @@ TAApp::Application.configure do
   # number of complex assets.
   config.assets.debug = true
 
+  ActionMailer::Base.default :from => 'app27277259@heroku.com'
   # Open email in browser
   config.action_mailer.delivery_method = :letter_opener
 end
