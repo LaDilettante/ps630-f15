@@ -1,0 +1,25 @@
+<% provide(:title, 'New assignment') %>
+<h1>Post new assignment</h1>
+
+<div class="container">
+  <div class="span6">
+    <%= form_for @assignment, :html => { :multipart => true } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      <!-- student_id is passed along due to nested route -->
+      <%#= f.hidden_field :student_id, student_id %>
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.label :deadline %>
+      <%= f.date_field :deadline %>
+
+      <%= f.label :max_grade %>
+      <%= f.number_field :max_grade %>
+
+      <%= f.submit "Post assignment", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<% provide(:title, 'All assignments') %>
+<h1>All assignments</h1>
+
+<ul class="assignments">
+  <% @assignments.each do |assignment| %>
+    <li>
+      <%= link_to assignment.title, assignment %>
+    </li>
+  <% end %>
+</ul>

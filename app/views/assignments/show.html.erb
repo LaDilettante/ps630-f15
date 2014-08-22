@@ -1,0 +1,15 @@
+<% provide(:title, @assignment.title) %>
+<h1>Assignment: <%= @assignment.title %></h1>
+
+<ul>
+  <li><%= @assignment.title %></li>
+  <li><%= @assignment.body %></li>
+</ul>
+
+<% if current_user.student? %>
+  <% @student = current_user %>
+  <%= link_to "Submit your work", new_student_homework_document_path(student_id: @student.id), class: "btn" %>
+<% elsif current_user.teacher? %>
+  <% @teacher = current_user %>
+  <%= link_to "Edit assignment", edit_assignment_path(@assignment), class: "btn" %>
+<% end %>

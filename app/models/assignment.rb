@@ -1,6 +1,7 @@
 class Assignment < ActiveRecord::Base
   has_many :homework_documents, inverse_of: :assignment
   validates :deadline, presence: true
+  validates :title, presence: true, allow_blank: false
 
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
   scope :open,     -> { where("deadline > ?", 1.day.ago) }

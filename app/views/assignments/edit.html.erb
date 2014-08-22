@@ -1,0 +1,30 @@
+<% provide(:title, "Edit assignment") %>
+<h1>Edit assignment</h1>
+
+<div class="row">
+  <div class="span6 offset3">
+    <%= form_for(@assignment) do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+
+      <%= f.label :title %>
+      <%= f.text_field :title %>
+
+      <%= f.label :body %>
+      <%= f.text_area :body %>
+
+      <%= f.label :deadline %>
+      <%= f.date_field :deadline %>
+
+      <%= f.label :max_grade %>
+      <%= f.number_field :max_grade %>
+
+      <%= f.submit "Save changes", class: "btn btn-primary" %>
+    <% end %>
+
+    <% if current_user.teacher? %>
+      <%= link_to "Delete assignment (careful!)", assignment_path(@assignment), method: "DELETE",
+        data: { confirm: "You sure? This will delete this assignment and all submitted works." }, 
+        class: "btn btn-large btn-danger" %>
+    <% end %>
+  </div>
+</div>

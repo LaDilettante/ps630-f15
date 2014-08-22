@@ -30,6 +30,7 @@ FactoryGirl.define do
     sequence(:title) { |n| "Assignment #{n} title" }
     sequence(:body) { |n| "Assignment #{n} body" }
     sequence(:deadline) { |n| 1.year.ago + n.weeks }
+    max_grade 100
     sequence(:graded) { false }
   end
 end

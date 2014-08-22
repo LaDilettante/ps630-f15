@@ -9,6 +9,8 @@ TAApp::Application.routes.draw do
   get '/signin' => 'sessions#new'
   delete '/signout' => 'sessions#destroy'
 
+  resources :assignments
+
   resources :users
 
   get '/users/show_image' => 'users#show_image'
@@ -18,6 +20,7 @@ TAApp::Application.routes.draw do
   end
 
   resources :teachers, controller: 'users', only: [:show]
+
 
   resources :sessions, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.

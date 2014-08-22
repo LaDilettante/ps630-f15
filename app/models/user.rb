@@ -2,9 +2,9 @@ class User < ActiveRecord::Base
   before_save { email.downcase! }
   before_create :create_hashed_token
 
-  validates :name, presence: true, length: { maximum: 30 }
+  validates :name, presence: true, length: { maximum: 30 }, allow_blank: false
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(?:\.[a-z\d\-]+)*\.[a-z]+\z/i
-  validates :email, presence: true, 
+  validates :email, presence: true, allow_blank: false,
                     uniqueness: { case_sensitive: false },
                     format: { with: VALID_EMAIL_REGEX }
   validates :password, length: { minimum: 6 }
