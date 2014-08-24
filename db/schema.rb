@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140608042127) do
+ActiveRecord::Schema.define(version: 20140824025822) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -21,6 +21,14 @@ ActiveRecord::Schema.define(version: 20140608042127) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "graded"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.string   "source_code_file_name"
+    t.string   "source_code_content_type"
+    t.integer  "source_code_file_size"
+    t.datetime "source_code_updated_at"
   end
 
   create_table "homework_documents", force: true do |t|

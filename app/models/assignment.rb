@@ -1,7 +1,19 @@
 class Assignment < ActiveRecord::Base
   has_many :homework_documents, inverse_of: :assignment
+  has_attached_file :document
+  has_attached_file :source_code
   validates :deadline, presence: true
   validates :title, presence: true, allow_blank: false
+
+  validates_attachment :document, presence: true,
+    content_type: { content_type: ["application/pdf"],
+                    message: "only pdf files" },
+    size: { in: 0..10.megabytes }
+
+  validates_attachment :source_code, presence: true,
+    content_type: { content_type: ["application/x-tex"],
+                     message: "only tex files" },
+    size: { in: 0..10.megabytes }
 
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
   scope :open,     -> { where("deadline > ?", 1.day.ago) }

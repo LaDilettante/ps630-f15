@@ -13,7 +13,7 @@ class HomeworkDocument < ActiveRecord::Base
 
   validates_attachment :ungraded_file, presence: true,
     content_type: { content_type: ["application/pdf"] ,
-                    message: "only msword, pdf, tex files" },
+                    message: "only pdf files" },
     size: { in: 0..10.megabytes }
 
   validates_attachment :graded_file, 

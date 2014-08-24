@@ -23,7 +23,7 @@ FactoryGirl.define do
 
   factory :homework_document do
     content Faker::Lorem.sentence(3)
-    ungraded_file File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf")
+    ungraded_file File.open(Rails.root + "spec/fixtures/documents/lab1.pdf")
   end
 
   factory :assignment do
@@ -32,5 +32,7 @@ FactoryGirl.define do
     sequence(:deadline) { |n| 1.year.ago + n.weeks }
     max_grade 100
     sequence(:graded) { false }
+    document { File.new(Rails.root + "spec/fixtures/documents/lab1.pdf") }
+    source_code { File.new(Rails.root + "spec/fixtures/documents/lab1.tex") }
   end
 end
