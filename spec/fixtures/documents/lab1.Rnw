@@ -1,0 +1,13 @@
+\documentclass{article}
+
+\begin{document}
+
+Sample R sweave file to test TA app
+
+<<>>=
+plot(rnorm(1000))
+@
+
+
+
+\end{document}

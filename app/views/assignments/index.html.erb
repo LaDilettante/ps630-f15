@@ -1,10 +1,23 @@
 <% provide(:title, 'All assignments') %>
 <h1>All assignments</h1>
 
-<ul class="assignments">
+<div class="row">
+<div class="span6" >
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Title</th>
+    <th scope="col">Deadline</th>
+    <th scope="col">Status</th>
+  </tr>
   <% @assignments.each do |assignment| %>
-    <li>
-      <%= link_to assignment.title, assignment %>
-    </li>
+    <tr>
+      <td><%= link_to assignment.title, assignment %></td>
+      <td><%= assignment.deadline.strftime("%m/%d/%Y") %></td>
+      <td><%= assignment.deadline < 1.day.ago ? "Closed" : "Open" %>, 
+          <%= assignment.graded ? "Graded" : "Ungraded" %></td>
+    </tr>
   <% end %>
-</ul>
+</table>
+</div>
+</div>
+

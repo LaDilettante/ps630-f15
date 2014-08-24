@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140824025822) do
+ActiveRecord::Schema.define(version: 20140824185825) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -29,6 +29,14 @@ ActiveRecord::Schema.define(version: 20140824025822) do
     t.string   "source_code_content_type"
     t.integer  "source_code_file_size"
     t.datetime "source_code_updated_at"
+    t.string   "solution_file_name"
+    t.string   "solution_content_type"
+    t.integer  "solution_file_size"
+    t.datetime "solution_updated_at"
+    t.string   "solution_source_code_file_name"
+    t.string   "solution_source_code_content_type"
+    t.integer  "solution_source_code_file_size"
+    t.datetime "solution_source_code_updated_at"
   end
 
   create_table "homework_documents", force: true do |t|

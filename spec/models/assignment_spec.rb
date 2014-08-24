@@ -15,6 +15,16 @@ describe Assignment do
     it { should be_invalid }
   end
 
+  describe "must have an uploaded document" do
+    before { assignment.document = nil }
+    it { should be_invalid }
+  end
+
+  describe "must have an uploaded source code" do
+    before { assignment.source_code = nil }
+    it { should be_invalid }
+  end
+
   describe "can be listed as" do
     let(:closed) { FactoryGirl.create(:assignment, deadline: 25.hours.ago) }
     let(:open) { FactoryGirl.create(:assignment, deadline: 23.hours.ago) }

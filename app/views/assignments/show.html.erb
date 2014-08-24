@@ -4,6 +4,12 @@
 <ul>
   <li><%= @assignment.title %></li>
   <li><%= @assignment.body %></li>
+  <li><%= @assignment.solution_file_name.nil? ?
+            "Solution not yet available" :
+            link_to("Solution", @assignment.solution.url) %></li>
+  <li><%= @assignment.solution_source_code_file_name.nil? ?
+            "Solution code not yet available" :
+            link_to("Solution source code", @assignment.solution_source_code.url) %></li>
 </ul>
 
 <% if current_user.student? %>

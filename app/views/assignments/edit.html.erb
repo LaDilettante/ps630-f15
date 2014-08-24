@@ -18,6 +18,12 @@
       <%= f.label :max_grade %>
       <%= f.number_field :max_grade %>
 
+      <%= f.label :solution %>
+      <%= f.file_field :solution %>
+
+      <%= f.label :solution_source_code %>
+      <%= f.file_field :solution_source_code %>
+
       <%= f.submit "Save changes", class: "btn btn-primary" %>
     <% end %>
 

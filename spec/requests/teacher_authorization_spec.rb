@@ -42,6 +42,8 @@ describe "Teacher" do
       before do
         fill_in "Title",        with: "Example Title"
         fill_in "Deadline",     with: "2014/03/22"
+        attach_file "Document", Rails.root + "spec/fixtures/documents/lab1.pdf"
+        attach_file "Source code", Rails.root + "spec/fixtures/documents/lab1.tex"
       end
 
       it "should create an assignment" do

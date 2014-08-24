@@ -2,17 +2,33 @@ class Assignment < ActiveRecord::Base
   has_many :homework_documents, inverse_of: :assignment
   has_attached_file :document
   has_attached_file :source_code
+  has_attached_file :solution
+  has_attached_file :solution_source_code
   validates :deadline, presence: true
   validates :title, presence: true, allow_blank: false
 
   validates_attachment :document, presence: true,
     content_type: { content_type: ["application/pdf"],
                     message: "only pdf files" },
+    file_name: { matches: [/pdf\Z/] },
     size: { in: 0..10.megabytes }
 
   validates_attachment :source_code, presence: true,
-    content_type: { content_type: ["application/x-tex"],
-                     message: "only tex files" },
+    content_type: { content_type: ["application/x-tex", "application/x-Rnw"],
+                     message: "only .tex and .Rnw files" },
+    file_name: { matches: [/tex\Z/, /Rnw\Z/] },
+    size: { in: 0..10.megabytes }
+
+  validates_attachment :solution,
+    content_type: { content_type: ["application/pdf"],
+                    message: "only pdf files" },
+    file_name: { matches: [/pdf\Z/] },
+    size: { in: 0..10.megabytes }
+
+  validates_attachment :solution_source_code,
+    content_type: { content_type: ["application/x-tex", "application/x-Rnw"],
+                     message: "only .tex and .Rnw files" },
+    file_name: { matches: [/tex\Z/, /Rnw\Z/] },
     size: { in: 0..10.megabytes }
 
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
