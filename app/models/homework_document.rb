@@ -21,6 +21,8 @@ class HomeworkDocument < ActiveRecord::Base
     content_type: { content_type: "/^application\/(msword|pdf|x-tex)/" ,
                      message: "only msword, pdf, tex files" }
 
+  validate :updated_time, :cannot_be_updated_past_deadline
+
   def calculate_penalty
     time_late = created_at - assignment.deadline
     case
@@ -42,5 +44,21 @@ class HomeworkDocument < ActiveRecord::Base
     else
       return grade * (1 - penalty)
     end
-  end 
+  end
+
+  def submitter?(user_id)
+    self.submitter_id == user_id
+  end
+
+  def grader?(user_id)
+    self.grader_id == user_id
+  end
+
+  private
+
+  def cannot_be_updated_past_deadline
+    if updated_time > assignment.deadline
+      errors.add(:updated_time, "can't be past deadline")
+    end
+  end
 end

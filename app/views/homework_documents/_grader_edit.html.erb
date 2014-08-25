@@ -1,0 +1,20 @@
+<h1>Submit your grading</h1>
+
+<div class="row">
+  <div class="span4">
+    <%= form_for @doc, 
+          url: student_homework_document_path(student_id: @doc.submitter_id,
+                                               id: @doc.id),
+          html: { multipart: true } do |f| %>
+      <%= render 'shared/error_messages', object: f.object %>
+      
+      <%= f.label :grade %>
+      <%= f.number_field :grade %>
+
+      <%= f.label :graded_file %>
+      <%= f.file_field :graded_file %>
+
+      <%= f.submit "Submit grading", class: "btn btn-large" %>
+    <% end %>
+  </div>
+</div>

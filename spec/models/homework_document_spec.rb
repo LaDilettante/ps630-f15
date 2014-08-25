@@ -66,4 +66,9 @@ describe HomeworkDocument do
       specify { expect(hw.reload.penalty).to eq 1 }
     end
   end
+
+  describe "edit can't be made past deadline" do
+    hw.update_attributes(updated_at: hw.assigment.deadline + 1.sec)
+    it { should be_invalid }
+  end
 end

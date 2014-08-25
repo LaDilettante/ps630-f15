@@ -6,7 +6,7 @@ class HomeworkDocumentsController < ApplicationController
   end
 
   def create
-    @doc = HomeworkDocument.new(doc_params)
+    @doc = HomeworkDocument.new(doc_submitter_params)
     @doc.submitter_id = params[:student_id]
     if @doc.save
       flash[:success] = "Homework submitted"
@@ -23,7 +23,37 @@ class HomeworkDocumentsController < ApplicationController
 
   def update
     @doc = HomeworkDocument.find(params[:id])
-    if @doc.update_attributes(doc_params)
+    if @doc.submitter?(current_user)
+      submitter_update(@doc)
+    elsif @doc.grader?(current_user)
+      grader_update(@doc)
+    end
+  end
+
+  private
+
+    def doc_submitter_params
+      params.require(:homework_document).permit(:assignment_id, 
+                                                :content, :ungraded_file)
+    end
+
+    def doc_grader_params
+      params.require(:homework_document).permit(:grade, :graded_file)
+    end
+
+  def submitter_update(doc)
+    if doc.update_attributes(doc_submitter_params)
+      flash[:success] = "Changes saved"
+      UserMailer.notify_available_grade(User.find(@doc.submitter_id), @doc).deliver
+      redirect_to User.find(@doc.grader_id)
+    else
+      flash[:error] = "Changes not saved"
+      render :edit
+    end
+  end
+
+  def grader_update(doc)
+    if doc.update_attributes(doc_grader_params)
       flash[:success] = "Grading submitted"
       UserMailer.notify_available_grade(User.find(@doc.submitter_id), @doc).deliver
       redirect_to User.find(@doc.grader_id)
@@ -32,13 +62,4 @@ class HomeworkDocumentsController < ApplicationController
       render :edit
     end
   end
-
-  private
-
-    def doc_params
-      params.require(:homework_document).permit(:assignment_id, 
-                                                :content, :grade,
-                                                :ungraded_file,
-                                                :graded_file)
-    end
 end
