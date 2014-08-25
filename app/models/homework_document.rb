@@ -21,7 +21,7 @@ class HomeworkDocument < ActiveRecord::Base
     content_type: { content_type: "/^application\/(msword|pdf|x-tex)/" ,
                      message: "only msword, pdf, tex files" }
 
-  validate :updated_at, :cannot_be_updated_past_deadline
+  validate :cannot_be_updated_past_deadline, on: :update
 
   def calculate_penalty
     time_late = created_at - assignment.deadline
@@ -57,7 +57,7 @@ class HomeworkDocument < ActiveRecord::Base
   private
 
   def cannot_be_updated_past_deadline
-    if updated_at > assignment.deadline
+    if updated_at > assignment.deadline + 1.day
       errors.add(:updated_at, "can't be past deadline")
     end
   end

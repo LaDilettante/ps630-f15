@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe HomeworkDocument do
-  let(:assignment) { FactoryGirl.build(:assignment) }
+  let(:assignment) { FactoryGirl.create(:assignment) }
   let(:submitter) { FactoryGirl.create(:student) }
   let(:hw) do
     submitter.submitted_homework_documents.new(assignment_id: assignment.id, 
@@ -41,8 +41,10 @@ describe HomeworkDocument do
   describe "submission" do
     describe "on time submission" do
       before do
-        assignment.update_attributes(deadline: Time.now)
-        hw.update_attributes(created_at: 2.hours.ago)
+        assignment.deadline = Time.now
+        assignment.save!
+        hw.created_at = 2.hours.ago
+        hw.save!
       end
       
       specify { expect(hw.reload.penalty).to eq 0 }
@@ -50,8 +52,10 @@ describe HomeworkDocument do
 
     describe "late submission within a day" do
       before do
-        assignment.update_attributes(deadline: Time.now)
-        hw.update_attributes(created_at: 5.hours.from_now)
+        assignment.deadline = Time.now
+        assignment.save!
+        hw.created_at = 5.hours.from_now
+        hw.save!
       end
 
       specify { expect(hw.reload.penalty).to eq 0.1 }
@@ -59,8 +63,10 @@ describe HomeworkDocument do
 
     describe "late submission more than a day" do
       before do
-        assignment.update_attributes(deadline: Time.now)
-        hw.update_attributes(created_at: 2.days.from_now)
+        assignment.deadline = Time.now
+        assignment.save!
+        hw.created_at = 2.days.from_now
+        hw.save!
       end
 
       specify { expect(hw.reload.penalty).to eq 1 }
@@ -68,7 +74,11 @@ describe HomeworkDocument do
   end
 
   describe "edit can't be made past deadline" do
-    hw.update_attributes(updated_at: hw.assigment.deadline + 1.sec)
+    before do
+      assignment.deadline = Time.now
+      assignment.save!
+      hw.updated_at = assignment.deadline + 1.second
+    end
     it { should be_invalid }
   end
 end
