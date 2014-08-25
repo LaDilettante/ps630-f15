@@ -13,7 +13,7 @@ class Assignment < ActiveRecord::Base
     size: { in: 0..10.megabytes }
 
   validates_attachment :source_code, presence: true,
-    content_type: { content_type: ["text/x-tex"],
+    content_type: { content_type: ["application/x-tex"],
                     message: "only .tex and .Rnw files" },
     size: { in: 0..10.megabytes }
 
