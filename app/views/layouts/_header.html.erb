@@ -12,7 +12,7 @@
                 Account <b class="caret"></b>
               </a>
               <ul class="dropdown-menu">
-                <li><%= link_to "Work station", current_user %></li>
+                <li><%= link_to "Work Station", current_user %></li>
                 <li><%= link_to "Profile Settings", edit_user_path(current_user) %></li>
                 <li class="divider"></li>
                 <li>
@@ -20,11 +20,11 @@
                 </li>
               </ul>
             </li>
-            <li><%= link_to "Assignment list", assignments_path %></li>
-            <li><%= link_to "Meeting list", meetings_path %></li>
           <% else %>
             <li><%= link_to "Sign in", signin_path %></li>
           <% end %>
+          <li><%= link_to "Assignment list", assignments_path %></li>
+          <li><%= link_to "Meeting list", meetings_path %></li>
         </ul>
       </nav>
     </div>
