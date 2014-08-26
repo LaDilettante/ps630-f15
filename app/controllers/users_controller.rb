@@ -3,6 +3,10 @@ class UsersController < ApplicationController
   before_action :turn_away_wrong_user, only: [:edit, :update, :destroy]
   before_action :turn_away_non_teacher, only: [:destroy]
   
+  def show
+    @user = User.find(params[:id])
+  end
+
   def new
     @user = User.new
     @type_options = type_options
@@ -19,10 +23,6 @@ class UsersController < ApplicationController
       @type_options = type_options
       render :new
     end
-  end
-
-  def show
-    @user = User.find(params[:id])
   end
 
   def edit

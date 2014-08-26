@@ -1,0 +1,28 @@
+<% provide(:title, "Meeting list") %>
+
+<h3>List of all meetings</h3>
+
+<div class="row">
+<div class="span6" >
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Title</th>
+    <th scope="col">Time</th>
+    <th scope="col">Materials</th>
+  </tr>
+  <% @meetings.each do |meeting| %>
+    <tr>
+      <td><%= meeting.title %></td>
+      <td><%= meeting.time.strftime("%m/%d/%Y") %></td>
+      <td>
+        <%= meeting.meeting_materials.each do |material| %>
+          <ul>
+            <%= link_to material.file_name, material %>
+          </ul>
+        <% end %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+</div>
+</div>

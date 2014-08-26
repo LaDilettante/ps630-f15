@@ -13,9 +13,9 @@
 
 <% if @user.student? %>
   <% @student = @user %>
-  <%= render 'student' %>
+  <%= render partial: 'student' %>
 <% elsif @user.teacher? %>
   <% @teacher = @user %>
-  <%= render 'teacher' %>
+  <%= render partial: 'teacher' %>
 <% end %>
 

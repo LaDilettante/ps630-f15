@@ -1,0 +1,16 @@
+<%= form_for @meeting do |f| %>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+
+  <%= f.label :time %>
+  <%= f.date_field :time %>
+
+  Materials:
+  <ul>
+    <%= f.fields_for :meeting_materials do |materials_form| %>
+      <li><%= materials_form.file_field :material %></li>
+    <% end %>
+  </ul>
+  <%= f.submit "Create account", class: "btn btn-large" %>
+<% end %>
