@@ -1,4 +1,5 @@
-<div class="row">
+<div class="row center">
+<h3>Visualization of your performance</h3>
 <%= content_tag "div", id: "grade_bargraph", class: "span6", 
   data: { :finalgrades => @student.submitted_homework_documents.map(&:final_grade) } do %>
 <% end %>
@@ -12,8 +13,12 @@
 <% end %>
 </div>
 
+<div class="center">
+<%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id), class: "btn btn-large btn-primary" %>
+</div>
+
 <div class="span12">
-<h3>Student's submissions:</h3>
+<h3>Your submissions:</h3>
 <table class="table table-hover">
   <tr>
     <th scope="col">Assignment title</th>
@@ -26,7 +31,7 @@
     <tr>
       <td><%= submission.assignment.title %></td>
       <td><%= submission.created_at %></td>
-      <td><%= submission.assignment.deadline.strftime("%m/%d/%Y") %></td>
+      <td><%= submission.assignment.deadline %></td>
       <td><%= submission.grade.nil? ? "NA" : "%.1f" % submission.grade %> / <%= "%.2f" % submission.penalty %> / <%= submission.grade.nil? ? "NA" : "%.1f" % submission.final_grade %></td>
       <td><%= submission.content %></td>
       <td>
@@ -39,13 +44,12 @@
           <%= link_to "Graded submission", submission.graded_file.url %>
         <% end %>
       </td>
+      <td><%= link_to "Edit your submission", edit_student_homework_document_path(student_id: @student.id, id: submission.id), class: "btn" %></td>
     </tr>
   <% end %>
 </table>
 
-<%= link_to "Submit new homework here", new_student_homework_document_path(student_id: @student.id), class: "btn" %>
-
-<h3>Student's grading:</h3>
+<h3>Your grading jobs:</h3>
 
 <h4>Finished</h4>
 <table class="table table-hover">

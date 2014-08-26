@@ -3,9 +3,11 @@ require 'spec_helper'
 describe HomeworkDocument do
   let(:assignment) { FactoryGirl.create(:assignment) }
   let(:submitter) { FactoryGirl.create(:student) }
+  let(:grader) { FactoryGirl.create(:student) }
   let(:hw) do
     submitter.submitted_homework_documents.new(assignment_id: assignment.id, 
-      ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf"))
+      ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf"),
+      grader_id: grader.id)
   end
 
   subject { hw }

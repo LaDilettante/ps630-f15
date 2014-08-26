@@ -77,7 +77,7 @@ $(document).ready(function() {
       .call(yAxis)
       .append("text")
       .attr("transform", "rotate(-90)")
-      .attr("y", - margin.left / 2)
+      .attr("y", - margin.left / 1.5)
       .style("text-anchor", "end")
-      .text("Grade");
+      .text("Final grade");
 });
