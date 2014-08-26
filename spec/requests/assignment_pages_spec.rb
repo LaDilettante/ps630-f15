@@ -46,7 +46,7 @@ describe "AssignmentPages" do
 
     it "should list each assignment" do
       Assignment.all.each do |assignment|
-        expect(page).to have_selector('li', text: assignment.title)
+        expect(page).to have_selector('td', text: assignment.title)
       end
     end
   end

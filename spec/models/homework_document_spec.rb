@@ -77,7 +77,8 @@ describe HomeworkDocument do
     before do
       assignment.deadline = Time.now
       assignment.save!
-      hw.updated_at = assignment.deadline + 1.second
+      hw.updated_at = assignment.deadline + 1.day + 1.second
+      hw.save!
     end
     it { should be_invalid }
   end

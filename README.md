@@ -14,7 +14,7 @@
 * Select all assignment that is not closed and graded, then send out randomly to a pool of graders. The pool of graders are the students who have submitted their homework for that assignment
 * `config/schedule.rb` uses the `wheneverize` gem to run `Assignment.grade_all` every 2 hour
 
-2. Automatically calculate penalty on late submission. Details in `app/models/homework_document.rb`
+2. Automatically calculate penalty on late submission. Details in `app/models/homework_document.rb`. Also, cannot edit submission 1 day after the deadline.
 
 3. Mailer automatically notify students of available grades and pending documents to be graded
 * Using `SendGrid` on `heroku`. Current email address: `teachingassistant.app@gmail.com`
