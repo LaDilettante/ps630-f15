@@ -6,7 +6,7 @@
   <body>
     <h1>Hi there, <%= @student.name %></h1>
     <p>
-      There is a <%= link_to "new meeting material", @meeting %> posted. Please do the readings before we meet.
+      There is a <%= link_to "new meeting material", meeting_url(@meeting) %> posted. Please do the readings before we meet.
     </p>
 
     <p>Have a great day!</p>

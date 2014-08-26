@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140826041451) do
+ActiveRecord::Schema.define(version: 20140826150153) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -62,6 +62,10 @@ ActiveRecord::Schema.define(version: 20140826041451) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "meeting_id"
+    t.string   "material_file_name"
+    t.string   "material_content_type"
+    t.integer  "material_file_size"
+    t.datetime "material_updated_at"
   end
 
   create_table "meetings", force: true do |t|

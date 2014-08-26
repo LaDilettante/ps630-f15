@@ -32,7 +32,7 @@
       <td><%= submission.assignment.title %></td>
       <td><%= submission.created_at %></td>
       <td><%= submission.assignment.deadline %></td>
-      <td><%= submission.grade.nil? ? "NA" : "%.1f" % submission.grade %> / <%= "%.2f" % submission.penalty %> / <%= submission.grade.nil? ? "NA" : "%.1f" % submission.final_grade %></td>
+      <td><%= submission.grade.nil? ? "NA" : ("%.1f" % submission.grade) %> / <%= "%.2f" % submission.penalty %> / <%= submission.grade.nil? ? "NA" : ("%.1f" % submission.final_grade) %></td>
       <td><%= submission.content %></td>
       <td>
         <% unless submission.ungraded_file.nil? %>

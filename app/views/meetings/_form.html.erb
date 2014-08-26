@@ -1,4 +1,4 @@
-<%= form_for @meeting do |f| %>
+<%= form_for @meeting, :html => { :multipart => true } do |f| %>
   <%= render 'shared/error_messages', object: f.object %>
   <%= f.label :title %>
   <%= f.text_field :title %>
@@ -8,9 +8,12 @@
 
   Materials:
   <ul>
-    <%= f.fields_for :meeting_materials do |materials_form| %>
-      <li><%= materials_form.file_field :material %></li>
+    <%= f.fields_for :meeting_materials, :html => { :multipart => true } do |materials_form| %>
+      <li>
+        <%= materials_form.label :material %>
+        <%= materials_form.file_field :material %>
+      </li>
     <% end %>
   </ul>
-  <%= f.submit "Create account", class: "btn btn-large" %>
+  <%= f.submit "Submit", class: "btn btn-large" %>
 <% end %>

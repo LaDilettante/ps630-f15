@@ -1,3 +1,3 @@
 $(document).ready(function() {
-  $("#meeting_time").datepicker()
+  $("#meeting_time").datepicker({ dateFormat: 'yyyy-mm-dd' })
 });

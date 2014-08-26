@@ -27,6 +27,7 @@ class UserMailer < ActionMailer::Base
   def notify_new_meeting(meeting)
     @meeting = meeting
     Student.all.each do |student|
+      @student = student
       mail(to: student.email, subject: "New meeting material posted")
     end
   end

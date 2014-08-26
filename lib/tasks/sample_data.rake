@@ -11,7 +11,7 @@ namespace :db do
           content: Faker::Lorem.sentence(2),
           assignment_id: assignment.id,
           created_at: assignment.deadline + rand(-1.day..1.day),
-          ungraded_file: File.open(Rails.root + "spec/fixtures/documents/midterm2_360.pdf") )
+          ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf") )
       end
     end
   end

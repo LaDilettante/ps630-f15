@@ -2,12 +2,12 @@
 
 <h3><%= @meeting.title %></h3>
 
-<h4><%= @meeting.time.strftime("%m/%d/%Y") %></h4>
+<h4><%= @meeting.time.strftime("%m/%d/%Y") unless @meeting.time.nil? %></h4>
 
 <h4>Materials</h4>
 <ul>
   <% @meeting.meeting_materials.each do |meeting_material| %>
-    <li><%= link_to meeting_material.material.file_name, 
+    <li><%= link_to meeting_material.material_file_name, 
                     meeting_material.material.url %>
     </li>
   <% end %>
