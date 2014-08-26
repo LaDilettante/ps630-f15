@@ -5,11 +5,11 @@
   </head>
 
   <body>
-    <h1>Hi <%= @user.email %></h1>
+    <h1>Hi <%= @user.name %></h1>
 
     <p>Welcome to the TA app. This site is designed to facilitate your learning -- it allows you to track your record and encourage you to check out the work of your colleagues.</p>
 
-    <p>There will be emails sent to you whenever your grade is available or when there is a colleague's homework for you to check out. Everything can also be accessed on <%= link_to "your profile page", user_path(@user) %>.</p>
+    <p>There will be emails sent to you whenever your grade is available or when there is a colleague's homework for you to check out. Everything can also be accessed on <%= link_to "your profile page", user_url(@user) %>.</p>
 
     <p>Have a great day!</p>
   </body>

@@ -23,4 +23,11 @@ class UserMailer < ActionMailer::Base
     @assignment  = doc.assignment
     mail(to: @submitter.email, subject: "Your grade for #{@assignment.title} is now available")
   end
+
+  def notify_new_meeting(meeting)
+    @meeting = meeting
+    Student.all.each do |student|
+      mail(to: student.email, subject: "New meeting material posted")
+    end
+  end
 end

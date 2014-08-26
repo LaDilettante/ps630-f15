@@ -20,6 +20,7 @@ class MeetingsController < ApplicationController
   def create
     @meeting = Meeting.find(meeting_params)
     if @meeting.save
+      UserMailer.notify_new_meeting(@meeting).deliver!
       flash[:success] = "Meeting created"
       redirect_to @meeting
     else
