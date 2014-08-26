@@ -75,13 +75,5 @@ describe HomeworkDocument do
     end
   end
 
-  describe "edit can't be made past deadline" do
-    before do
-      assignment.deadline = Time.now
-      assignment.save!
-      hw.updated_at = assignment.deadline + 1.day + 1.second
-      hw.save!
-    end
-    it { should be_invalid }
-  end
+  
 end
