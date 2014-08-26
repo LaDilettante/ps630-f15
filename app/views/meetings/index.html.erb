@@ -12,12 +12,13 @@
   </tr>
   <% @meetings.each do |meeting| %>
     <tr>
-      <td><%= meeting.title %></td>
+      <td><%= link_to meeting.title, meeting %></td>
       <td><%= meeting.time.strftime("%m/%d/%Y") %></td>
       <td>
-        <%= meeting.meeting_materials.each do |material| %>
+        <% meeting.meeting_materials.each do |meeting_material| %>
           <ul>
-            <%= link_to material.file_name, material %>
+            <%= link_to meeting_material.material_file_name, 
+                        meeting_material.material.url %>
           </ul>
         <% end %>
       </td>

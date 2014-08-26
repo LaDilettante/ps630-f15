@@ -13,6 +13,7 @@
 //= require jquery
 //= require jquery-ui
 //= require jquery_ujs
+//= require jquery.turbolinks
 //= require bootstrap
 //= require d3
 //= require turbolinks

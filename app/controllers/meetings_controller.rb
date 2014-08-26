@@ -19,6 +19,7 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(meeting_params)
+    @meeting.time = DateTime.strptime(params[:meeting][:time], "%m/%d/%Y" )
     if @meeting.save
       UserMailer.notify_new_meeting(@meeting).deliver!
       flash[:success] = "Meeting created"
@@ -33,7 +34,7 @@ class MeetingsController < ApplicationController
 
     def meeting_params
       params.require(:meeting)
-            .permit(:title, :time, 
+            .permit(:title,
                     meeting_materials_attributes: [:material, :_destroy])
     end
 end
