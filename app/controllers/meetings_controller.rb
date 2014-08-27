@@ -30,6 +30,18 @@ class MeetingsController < ApplicationController
     end
   end
 
+  def update
+    @meeting = Meeting.find(params[:id])
+    @meeting.time = DateTime.strptime(params[:meeting][:time], "%m/%d/%Y" )
+    if @meeting.update_attributes(meeting_params)
+      flash[:success] = "Meeting updated"
+      redirect_to @meeting
+    else
+      flash.now[:error] = "Unable to save changes"
+      render :edit
+    end
+  end
+
   private
 
     def meeting_params

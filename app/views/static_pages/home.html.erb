@@ -12,14 +12,17 @@
   <div class="center hero-unit">
     <h1>Welcome to <%= site_title %>!</h1>
 
+    <br>
+    <br>
+
     <p>
       <%= link_to "Sign up", signup_path,
             class: "btn btn-large btn-primary" %>
-      or
       <%= link_to "Sign in", signin_path,
             class: "btn btn-large btn-primary" %>
     <br>
+    <br>
   </div>
-
+  <%= image_tag "duke-logo-footer.jpg", alt: "Duke University" %>
   
 <% end %>

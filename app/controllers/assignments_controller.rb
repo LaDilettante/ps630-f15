@@ -7,6 +7,7 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(assignment_params)
+    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline], "%m/%d/%Y" )
     if @assignment.save
       flash[:success] = "Assignment posted"
       redirect_to @assignment
@@ -30,6 +31,7 @@ class AssignmentsController < ApplicationController
 
   def update
     @assignment = Assignment.find(params[:id])
+    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline], "%m/%d/%Y" )
     if @assignment.update_attributes(assignment_params)
       flash[:success] = "Assignment updated"
       redirect_to @assignment
@@ -49,7 +51,7 @@ class AssignmentsController < ApplicationController
 
     def assignment_params
       params.require(:assignment)
-            .permit(:title, :body, :deadline,
+            .permit(:title, :body,
                     :max_grade, :document, :source_code)
     end
 

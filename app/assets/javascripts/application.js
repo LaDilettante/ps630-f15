@@ -18,4 +18,5 @@
 //= require d3
 //= require turbolinks
 //= require meeting
+//= require assignment
 //= require_tree .
