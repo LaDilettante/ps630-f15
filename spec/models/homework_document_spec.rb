@@ -7,6 +7,7 @@ describe HomeworkDocument do
   let(:hw) do
     submitter.submitted_homework_documents.new(assignment_id: assignment.id, 
       ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf"),
+      ungraded_file_source_code: File.open(Rails.root + "spec/fixtures/documents/lab1.tex"),
       grader_id: grader.id)
   end
 

@@ -35,12 +35,14 @@ class HomeworkDocumentsController < ApplicationController
   private
 
     def doc_submitter_params
-      params.require(:homework_document).permit(:assignment_id, 
-                                                :content, :ungraded_file)
+      params.require(:homework_document)
+            .permit(:assignment_id, :content,
+                    :ungraded_file, :ungraded_file_source_code)
     end
 
     def doc_grader_params
-      params.require(:homework_document).permit(:grade, :graded_file)
+      params.require(:homework_document)
+            .permit(:grade, :graded_file, :graded_file_source_code)
     end
 
     def submitter_update(doc)

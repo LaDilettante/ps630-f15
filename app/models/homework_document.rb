@@ -3,7 +3,9 @@ class HomeworkDocument < ActiveRecord::Base
   belongs_to :submitter, class_name: "Student"
   belongs_to :assignment, inverse_of: :homework_documents
   has_attached_file :ungraded_file
+  has_attached_file :ungraded_file_source_code
   has_attached_file :graded_file
+  has_attached_file :graded_file_source_code
 
   after_create :calculate_penalty
 
@@ -14,7 +16,13 @@ class HomeworkDocument < ActiveRecord::Base
   validates_attachment :ungraded_file, presence: true,
     size: { in: 0..10.megabytes }
 
+  validates_attachment :ungraded_file_source_code, presence: true,
+    size: { in: 0..10.megabytes }
+
   validates_attachment :graded_file, 
+    size: { in: 0..10.megabytes }
+
+  validates_attachment :graded_file_source_code,
     size: { in: 0..10.megabytes }
 
   def calculate_penalty

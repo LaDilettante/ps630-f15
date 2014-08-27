@@ -36,12 +36,22 @@
       <td><%= submission.content %></td>
       <td>
         <% unless submission.ungraded_file.nil? %>
-          <%= link_to "Ungraded submission", submission.ungraded_file.url %>
+          <%= link_to "Ungraded file", submission.ungraded_file.url %>
+        <% end %>
+      </td>
+      <td>
+        <% unless submission.ungraded_file_source_code.nil? %>
+          <%= link_to "Ungraded source code", submission.ungraded_file_source_code.url %>
         <% end %>
       </td>
       <td>
         <% unless submission.graded_file.nil? || submission.grade.nil? %>
-          <%= link_to "Graded submission", submission.graded_file.url %>
+          <%= link_to "Graded file", submission.graded_file.url %>
+        <% end %>
+      </td>
+      <td>
+        <% unless submission.graded_file_source_code.nil? || submission.grade.nil? %>
+          <%= link_to "Graded source code", submission.graded_file_source_code.url %>
         <% end %>
       </td>
       <td><%= link_to "Edit your submission", edit_student_homework_document_path(student_id: @student.id, id: submission.id), class: "btn" %></td>

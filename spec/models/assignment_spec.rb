@@ -9,6 +9,8 @@ describe Assignment do
   it { should respond_to :grader }
   it { should respond_to :document }
   it { should respond_to :source_code }
+  it { should respond_to :solution }
+  it { should respond_to :solution_source_code }
 
   describe "must have a deadline" do
     before { assignment.deadline = nil }
@@ -45,7 +47,8 @@ describe Assignment do
 
     before do 
       submitter.submitted_homework_documents.create(assignment_id: assignment.id,
-        ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf"))
+        ungraded_file: File.open(Rails.root + "spec/fixtures/documents/lab1.pdf"),
+        ungraded_file_source_code: File.open(Rails.root + "spec/fixtures/documents/lab1.tex"))
     end
 
     let(:non_submitter) { FactoryGirl.create(:student) }

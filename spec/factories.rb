@@ -24,6 +24,7 @@ FactoryGirl.define do
   factory :homework_document do
     content Faker::Lorem.sentence(3)
     ungraded_file File.open(Rails.root + "spec/fixtures/documents/lab1.pdf")
+    ungraded_file_source_code File.open(Rails.root + "spec/fixtures/documents/lab1.tex")
   end
 
   factory :assignment do

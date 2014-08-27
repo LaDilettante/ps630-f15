@@ -65,6 +65,7 @@ describe "AssignmentPages" do
     describe "with invalid information" do
       before do
         fill_in "Title", with: ""
+        fill_in "Deadline", with: "03/22/2014" # Deadline is correct
         click_button "Save changes"
       end
       it { should have_content('error') }
