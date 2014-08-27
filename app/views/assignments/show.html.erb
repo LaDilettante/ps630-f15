@@ -1,9 +1,12 @@
 <% provide(:title, @assignment.title) %>
 <h1>Assignment: <%= @assignment.title %></h1>
 
+<p>Deadline: Beginning of <%= @assignment.deadline.strftime("%m/%d/%Y") %></p>
+<p><%= @assignment.body %></p>
+
 <ul>
-  <li><%= @assignment.title %></li>
-  <li><%= @assignment.body %></li>
+  <li><%= link_to "Assignment", @assignment.document.url %></li>
+  <li><%= link_to "Assignment source code", @assignment.source_code.url %></li> 
   <li><%= @assignment.solution_file_name.nil? ?
             "Solution not yet available" :
             link_to("Solution", @assignment.solution.url) %></li>

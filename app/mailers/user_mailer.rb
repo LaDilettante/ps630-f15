@@ -1,5 +1,6 @@
 class UserMailer < ActionMailer::Base
   default from: "teachingassistant.app@gmail.com"
+  helper ApplicationHelper
 
   def welcome_email(user)
     @user = user

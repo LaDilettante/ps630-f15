@@ -13,10 +13,16 @@
       <%= f.text_area :body %>
 
       <%= f.label :deadline %>
-      <%= f.date_field :deadline %>
+      <%= f.text_field :deadline, class: "datepicker" %>
 
       <%= f.label :max_grade %>
       <%= f.number_field :max_grade %>
+
+      <%= f.label :document %>
+      <%= f.file_field :document %>
+
+      <%= f.label :source_code %>
+      <%= f.file_field :source_code %>
 
       <%= f.label :solution %>
       <%= f.file_field :solution %>

@@ -25,9 +25,9 @@ class HomeworkDocumentsController < ApplicationController
 
   def update
     @doc = HomeworkDocument.find(params[:id])
-    if @doc.submitter?(current_user)
+    if @doc.submitter?(current_user.id)
       submitter_update(@doc)
-    elsif @doc.grader?(current_user)
+    elsif @doc.grader?(current_user.id)
       grader_update(@doc)
     end
   end
@@ -46,8 +46,7 @@ class HomeworkDocumentsController < ApplicationController
     def submitter_update(doc)
       if doc.update_attributes(doc_submitter_params)
         flash[:success] = "Changes saved"
-        UserMailer.notify_available_grade(User.find(@doc.submitter_id), @doc).deliver
-        redirect_to User.find(@doc.grader_id)
+        redirect_to User.find(doc.submitter_id)
       else
         flash[:error] = "Changes not saved"
         render :edit
@@ -57,8 +56,8 @@ class HomeworkDocumentsController < ApplicationController
     def grader_update(doc)
       if doc.update_attributes(doc_grader_params)
         flash[:success] = "Grading submitted"
-        UserMailer.notify_available_grade(User.find(@doc.submitter_id), @doc).deliver
-        redirect_to User.find(@doc.grader_id)
+        UserMailer.notify_available_grade(User.find(doc.submitter_id), doc).deliver
+        redirect_to User.find(doc.grader_id)
       else
         flash.now[:error] = "Grading was not submitted"
         render :edit
