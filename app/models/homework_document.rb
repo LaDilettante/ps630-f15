@@ -12,14 +12,10 @@ class HomeworkDocument < ActiveRecord::Base
   validates :grade, numericality: true, allow_nil: true
 
   validates_attachment :ungraded_file, presence: true,
-    content_type: { content_type: ["application/pdf"] ,
-                    message: "only pdf files" },
     size: { in: 0..10.megabytes }
 
   validates_attachment :graded_file, 
-    size: { in: 0..10.megabytes },
-    content_type: { content_type: "/^application\/(msword|pdf|x-tex)/" ,
-                     message: "only msword, pdf, tex files" }
+    size: { in: 0..10.megabytes }
 
   def calculate_penalty
     time_late = created_at - assignment.deadline

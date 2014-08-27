@@ -8,25 +8,15 @@ class Assignment < ActiveRecord::Base
   validates :title, presence: true, allow_blank: false
 
   validates_attachment :document, presence: true,
-    content_type: { content_type: ["application/pdf"],
-                    message: "only pdf files" },
     size: { in: 0..10.megabytes }
 
   validates_attachment :source_code, presence: true,
-    content_type: { content_type: ["application/x-tex"],
-                    message: "only .tex and .Rnw files" },
     size: { in: 0..10.megabytes }
 
   validates_attachment :solution,
-    content_type: { content_type: ["application/pdf"],
-                    message: "only pdf files" },
-    file_name: { matches: [/pdf\Z/] },
     size: { in: 0..10.megabytes }
 
   validates_attachment :solution_source_code,
-    content_type: { content_type: ["application/x-tex", "application/x-Rnw"],
-                     message: "only .tex and .Rnw files" },
-    file_name: { matches: [/tex\Z/, /Rnw\Z/] },
     size: { in: 0..10.megabytes }
 
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
