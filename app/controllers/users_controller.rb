@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
-  before_action :force_user_to_sign_in, only: [:edit, :update, :index, :destroy]
-  before_action :turn_away_wrong_user, only: [:edit, :update, :destroy]
+  before_action :force_user_to_sign_in, only: [:show, :edit, :update, :index, :destroy]
+  before_action :turn_away_wrong_user, only: [:show, :edit, :update, :destroy]
   before_action :turn_away_non_teacher, only: [:destroy]
   
   def show
