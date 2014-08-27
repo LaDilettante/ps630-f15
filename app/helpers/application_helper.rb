@@ -10,6 +10,6 @@ module ApplicationHelper
   end
 
   def site_title
-    "TA app"
+    "POLSCI 630"
   end
 end
