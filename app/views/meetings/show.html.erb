@@ -12,3 +12,8 @@
     </li>
   <% end %>
 </ul>
+
+<% if current_user.teacher? %>
+  <% @teacher = current_user %>
+  <%= link_to "Edit meeting", edit_meeting_path(@meeting), class: "btn" %>
+<% end %>

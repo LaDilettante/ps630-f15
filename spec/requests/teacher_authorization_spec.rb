@@ -4,6 +4,7 @@ describe "Teacher" do
   let(:teacher) { FactoryGirl.create(:teacher) }
   let(:student) { FactoryGirl.create(:student) }
   let(:assignment) { FactoryGirl.create(:assignment) }
+  let(:deadline_string) { "03/22/2014 08:00" }
   before { sign_in teacher }
 
   subject { page }
@@ -26,7 +27,7 @@ describe "Teacher" do
     before { visit new_assignment_path }
     let(:submit) { "Post assignment" }
 
-    before { fill_in "Deadline", with: "03/22/2014" } 
+    before { fill_in "Deadline", with: deadline_string } 
     # A kludge to make sure that this date format is right, thus
     # does not raise invalid date error
 
@@ -45,7 +46,7 @@ describe "Teacher" do
     describe "with valid information" do
       before do
         fill_in "Title",        with: "Example Title"
-        fill_in "Deadline",     with: "03/22/2014"
+        fill_in "Deadline",     with: deadline_string
         attach_file "Document", Rails.root + "spec/fixtures/documents/lab1.pdf"
         attach_file "Source code", Rails.root + "spec/fixtures/documents/lab1.tex"
       end
@@ -58,7 +59,7 @@ describe "Teacher" do
 
   describe "can edit assignment" do
     before { visit edit_assignment_path(assignment) }
-    before { fill_in "Deadline", with: "03/22/2014" } 
+    before { fill_in "Deadline", with: deadline_string } 
     # A kludge to make sure that this date format is right, thus
     # does not raise invalid date error
 
@@ -75,13 +76,12 @@ describe "Teacher" do
     describe "with valid information" do
       let(:new_title) { "New title" }
       let(:new_body) { "The new body of this assignment" }
-      let(:new_deadline) { "04/22/2014" }
       
       before do
         visit edit_assignment_path(assignment)
         fill_in "Title",           with: new_title
         fill_in "Body",            with: new_body
-        fill_in "Deadline",        with: new_deadline
+        fill_in "Deadline",        with: deadline_string
         click_button "Save changes"
       end
 

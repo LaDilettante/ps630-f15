@@ -19,7 +19,7 @@ class MeetingsController < ApplicationController
 
   def create
     @meeting = Meeting.new(meeting_params)
-    @meeting.time = DateTime.strptime(params[:meeting][:time] + " Eastern Time (US & Canada)", "%m/%d/%Y %H:%M %Z").in_time_zone
+    @meeting.time = parse_time_with_correct_zone(params[:meeting][:time])
     if @meeting.save
       UserMailer.notify_new_meeting(@meeting).deliver!
       flash[:success] = "Meeting created"
@@ -32,7 +32,7 @@ class MeetingsController < ApplicationController
 
   def update
     @meeting = Meeting.find(params[:id])
-    @meeting.time = DateTime.strptime(params[:meeting][:time] + " Eastern Time (US & Canada)", "%m/%d/%Y %H:%M %Z").in_time_zone
+    @meeting.time = parse_time_with_correct_zone(params[:meeting][:time])
     if @meeting.update_attributes(meeting_params)
       flash[:success] = "Meeting updated"
       redirect_to @meeting
