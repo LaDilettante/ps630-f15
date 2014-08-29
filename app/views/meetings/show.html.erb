@@ -2,7 +2,7 @@
 
 <h3><%= @meeting.title %></h3>
 
-<h4><%= @meeting.time.strftime("%m/%d/%Y") unless @meeting.time.nil? %></h4>
+<p><%= @meeting.time.strftime("%m/%d/%Y %H:%M %Z") unless @meeting.time.nil? %></p>
 
 <h4>Materials</h4>
 <ul>

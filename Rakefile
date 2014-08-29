@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-TAApp::Application.load_tasks
+Polsci630::Application.load_tasks

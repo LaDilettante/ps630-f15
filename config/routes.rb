@@ -1,4 +1,4 @@
-TAApp::Application.routes.draw do
+Polsci630::Application.routes.draw do
   root 'static_pages#home'
 
   get '/home' => 'static_pages#home'

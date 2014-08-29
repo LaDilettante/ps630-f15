@@ -1,7 +1,7 @@
 <% provide(:title, @assignment.title) %>
 <h1>Assignment: <%= @assignment.title %></h1>
 
-<p>Deadline: Beginning of <%= @assignment.deadline.strftime("%m/%d/%Y") %></p>
+<p>Deadline: <%= @assignment.deadline.strftime("%m/%d/%Y %H:%M %Z") %></p>
 <p><%= @assignment.body %></p>
 
 <ul>
