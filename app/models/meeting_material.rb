@@ -9,6 +9,6 @@ class MeetingMaterial < ActiveRecord::Base
   private
 
     def set_content_type
-      self.material.instance_write(:content_type, MIME::Types.type_for(self.upload.queued_for_write[:original].file_name).to_s)
+      self.material.instance_write(:content_type, MIME::Types.type_for(self.material.queued_for_write[:original].file_name).to_s)
     end
 end
