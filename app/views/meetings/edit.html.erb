@@ -6,4 +6,10 @@
   <div class="span6">
     <%= render partial: 'form' %>
   </div>
+
+  <% if current_user.teacher? %>
+    <%= link_to "Delete meeting (careful!)", meeting_path(@meeting), method: "DELETE",
+        data: { confirm: "You sure?" }, 
+        class: "btn btn-large btn-danger" %>
+  <% end %>
 </div>

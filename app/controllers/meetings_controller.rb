@@ -14,7 +14,6 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
-    3.times { @meeting.meeting_materials.new }
   end
 
   def create
@@ -40,6 +39,12 @@ class MeetingsController < ApplicationController
       flash.now[:error] = "Unable to save changes"
       render :edit
     end
+  end
+
+  def destroy
+    Meeting.find(params[:id]).destroy
+    flash[:success] = "Meeting deleted"
+    redirect_to root_path
   end
 
   private
