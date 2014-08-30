@@ -15,15 +15,19 @@ class HomeworkDocument < ActiveRecord::Base
 
   validates_attachment :ungraded_file, presence: true,
     size: { in: 0..10.megabytes }
+  before_ungraded_file_post_process :set_ungraded_file_content_type
 
   validates_attachment :ungraded_file_source_code, presence: true,
     size: { in: 0..10.megabytes }
 
   validates_attachment :graded_file, 
     size: { in: 0..10.megabytes }
+  before_graded_file_post_process :set_graded_file_content_type
 
   validates_attachment :graded_file_source_code,
     size: { in: 0..10.megabytes }
+
+
 
   def calculate_penalty
     time_late = created_at - assignment.deadline
@@ -55,4 +59,14 @@ class HomeworkDocument < ActiveRecord::Base
   def grader?(user_id)
     self.grader_id == user_id
   end
+
+  private
+
+    def set_ungraded_file_content_type
+      self.ungraded_file.instance_write(:content_type, MIME::Types.type_for(self.ungraded_file_file_name).to_s)
+    end
+
+    def set_graded_file_content_type
+      self.graded_file.instance_write(:content_type, MIME::Types.type_for(self.graded_file_file_name).to_s)
+    end
 end
