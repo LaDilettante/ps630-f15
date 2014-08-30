@@ -63,10 +63,10 @@ class HomeworkDocument < ActiveRecord::Base
   private
 
     def set_ungraded_file_content_type
-      self.ungraded_file.instance_write(:content_type, MIME::Types.type_for(self.ungraded_file_file_name).to_s)
+      self.ungraded_file.instance_write(:content_type, MIME::Types.type_for(self.ungraded_file_file_name).first.content_type.to_s)
     end
 
     def set_graded_file_content_type
-      self.graded_file.instance_write(:content_type, MIME::Types.type_for(self.graded_file_file_name).to_s)
+      self.graded_file.instance_write(:content_type, MIME::Types.type_for(self.graded_file_file_name).first.content_type.to_s)
     end
 end

@@ -56,10 +56,10 @@ class Assignment < ActiveRecord::Base
   private
 
     def set_document_content_type
-      self.document.instance_write(:content_type, MIME::Types.type_for(self.document_file_name).to_s)
+      self.document.instance_write(:content_type, MIME::Types.type_for(self.document_file_name).first.content_type.to_s)
     end
 
     def set_solution_content_type
-      self.solution.instance_write(:content_type, MIME::Types.type_for(self.solution_file_name).to_s)
+      self.solution.instance_write(:content_type, MIME::Types.type_for(self.solution_file_name).first.content_type.to_s)
     end
 end
