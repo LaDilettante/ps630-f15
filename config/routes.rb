@@ -4,6 +4,7 @@ Polsci630::Application.routes.draw do
   get '/home' => 'static_pages#home'
   get '/contact' => 'static_pages#contact'
   get '/about' => 'static_pages#about'
+  get '/info/' => 'static_pages#info'
 
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
