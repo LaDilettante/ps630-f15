@@ -47,6 +47,6 @@ class MeetingsController < ApplicationController
     def meeting_params
       params.require(:meeting)
             .permit(:title,
-                    meeting_materials_attributes: [:material, :_destroy])
+                    meeting_materials_attributes: [:id, :material, :_destroy])
     end
 end
