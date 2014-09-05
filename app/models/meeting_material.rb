@@ -4,7 +4,7 @@ class MeetingMaterial < ActiveRecord::Base
     s3_headers: { 'Content-Disposition' => "attachment" }
 
   attr_accessor :delete_material
-  before_validation { material.clear if delete_material == '1' }
+  before_update { material = nil if delete_material == '1' }
 
   validates_attachment :material, size: { in: 0..10.megabytes }
 end
