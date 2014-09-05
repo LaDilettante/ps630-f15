@@ -9,12 +9,14 @@ class Assignment < ActiveRecord::Base
 
   validates_attachment :document, presence: true,
     size: { in: 0..10.megabytes }
+  before_document_post_process :set_document_content_type
 
   validates_attachment :source_code, presence: true,
     size: { in: 0..10.megabytes }
 
   validates_attachment :solution,
     size: { in: 0..10.megabytes }
+  before_solution_post_process :set_solution_content_type
 
   validates_attachment :solution_source_code,
     size: { in: 0..10.megabytes }
@@ -50,4 +52,14 @@ class Assignment < ActiveRecord::Base
     end
     update_attribute(:graded, true)
   end
+
+  private
+
+    def set_document_content_type
+      self.document.instance_write(:content_type, MIME::Types.type_for(self.document_file_name).first.content_type.to_s)
+    end
+
+    def set_solution_content_type
+      self.solution.instance_write(:content_type, MIME::Types.type_for(self.solution_file_name).first.content_type.to_s)
+    end
 end

@@ -14,12 +14,11 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
-    3.times { @meeting.meeting_materials.new }
   end
 
   def create
     @meeting = Meeting.new(meeting_params)
-    @meeting.time = DateTime.strptime(params[:meeting][:time], "%m/%d/%Y" )
+    @meeting.time = parse_time_with_correct_zone(params[:meeting][:time])
     if @meeting.save
       UserMailer.notify_new_meeting(@meeting).deliver!
       flash[:success] = "Meeting created"
@@ -32,7 +31,7 @@ class MeetingsController < ApplicationController
 
   def update
     @meeting = Meeting.find(params[:id])
-    @meeting.time = DateTime.strptime(params[:meeting][:time], "%m/%d/%Y" )
+    @meeting.time = parse_time_with_correct_zone(params[:meeting][:time])
     if @meeting.update_attributes(meeting_params)
       flash[:success] = "Meeting updated"
       redirect_to @meeting
@@ -40,6 +39,12 @@ class MeetingsController < ApplicationController
       flash.now[:error] = "Unable to save changes"
       render :edit
     end
+  end
+
+  def destroy
+    Meeting.find(params[:id]).destroy
+    flash[:success] = "Meeting deleted"
+    redirect_to root_path
   end
 
   private

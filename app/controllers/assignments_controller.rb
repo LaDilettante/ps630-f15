@@ -7,7 +7,7 @@ class AssignmentsController < ApplicationController
 
   def create
     @assignment = Assignment.new(assignment_params)
-    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline], "%m/%d/%Y" )
+    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline] + " Eastern Time (US & Canada)", "%m/%d/%Y %H:%M %Z").in_time_zone
     if @assignment.save
       flash[:success] = "Assignment posted"
       redirect_to @assignment
@@ -31,7 +31,7 @@ class AssignmentsController < ApplicationController
 
   def update
     @assignment = Assignment.find(params[:id])
-    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline], "%m/%d/%Y" )
+    @assignment.deadline = DateTime.strptime(params[:assignment][:deadline] + " Eastern Time (US & Canada)", "%m/%d/%Y %H:%M %Z").in_time_zone
     if @assignment.update_attributes(assignment_params)
       flash[:success] = "Assignment updated"
       redirect_to @assignment
