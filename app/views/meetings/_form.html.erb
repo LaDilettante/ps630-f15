@@ -12,6 +12,9 @@
       <li>
         <%= materials_form.label :material %>
         <%= materials_form.file_field :material %>
+
+        <%= materials_form.label :delete_material %>
+        <%= materials_form.check_box :delete_material %>
       </li>
     <% end %>
   </ul>
