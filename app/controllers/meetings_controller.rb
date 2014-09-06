@@ -20,7 +20,9 @@ class MeetingsController < ApplicationController
     @meeting = Meeting.new(meeting_params)
     @meeting.time = parse_time_with_correct_zone(params[:meeting][:time])
     if @meeting.save
-      UserMailer.notify_new_meeting(@meeting).deliver!
+      User.all.each do |user|
+        UserMailer.notify_new_meeting(@meeting, user).deliver!
+      end 
       flash[:success] = "Meeting created"
       redirect_to @meeting
     else

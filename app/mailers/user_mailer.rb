@@ -25,12 +25,10 @@ class UserMailer < ActionMailer::Base
     mail(to: @submitter.email, subject: "Your grade for #{@assignment.title} is now available")
   end
 
-  def notify_new_meeting(meeting)
+  def notify_new_meeting(meeting, user)
     @meeting = meeting
-    Student.all.each do |student|
-      @student = student
-      mail(to: student.email, subject: "New meeting material posted")
-    end
+    @user = user
+    mail(to: user.email, subject: "New meeting material posted")
   end
 
   def password_reset(user)
