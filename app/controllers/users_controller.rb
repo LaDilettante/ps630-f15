@@ -34,10 +34,10 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
     if @user.update_attributes(user_params)
       UserMailer.notify_setting_change(@user).deliver!
-      flash[:success] = "Your profile has been updated"
+      flash[:success] = "Your profile has been updated."
       redirect_to @user
     else
-      flash.now[:error] = "Unable to save changes"
+      flash.now[:error] = "Unable to save changes."
       render :edit
     end
   end

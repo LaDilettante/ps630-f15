@@ -32,4 +32,14 @@ class UserMailer < ActionMailer::Base
       mail(to: student.email, subject: "New meeting material posted")
     end
   end
+
+  def password_reset(user)
+    @user = user
+    mail(to: user.email, subject: "Your polsci630 account requested a password reset")
+  end
+
+  def notify_successful_password_reset(user)
+    @user = user
+    mail(to: user.email, subject: "The password of your polsci630 account has been reset")
+  end
 end

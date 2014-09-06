@@ -1,4 +1,5 @@
 Polsci630::Application.routes.draw do
+  get "password_resets/new"
   root 'static_pages#home'
 
   get '/home' => 'static_pages#home'
@@ -9,6 +10,8 @@ Polsci630::Application.routes.draw do
   get '/signup' => 'users#new'
   get '/signin' => 'sessions#new'
   delete '/signout' => 'sessions#destroy'
+
+  resources :password_resets, only: [:new, :create, :edit, :update]
 
   # Class room related
   resources :assignments

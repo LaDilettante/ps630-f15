@@ -19,6 +19,12 @@ class User < ActiveRecord::Base
     Digest::SHA1.hexdigest(raw_token.to_s)
   end
 
+  def send_password_reset
+    self.update_attribute(:password_reset_token, User.digest(User.new_raw_token))
+    self.update_attribute(:password_reset_sent_at, Time.zone.now)
+    UserMailer.password_reset(self).deliver!
+  end
+
   def student?
     type == "Student"
   end
