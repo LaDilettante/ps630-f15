@@ -10,11 +10,15 @@
   <ul>
     <%= f.fields_for :meeting_materials, :html => { :multipart => true } do |materials_form| %>
       <li>
-        <%= materials_form.label :material %>
-        <%= materials_form.file_field :material %>
-
-        <%= materials_form.label :_destroy, class: "checkbox inline" do %>
-          Remove attachment <%= materials_form.check_box :_destroy %>
+        <% if materials_form.object.material.exists? %>
+          <%= link_to materials_form.object.material_file_name,
+                      materials_form.object.material.url %>
+          <%= materials_form.label :_destroy, class: "checkbox inline" do %>
+            Remove attachment <%= materials_form.check_box :_destroy %>
+          <% end %>
+        <% else %>
+          <%= materials_form.label :material %>
+          <%= materials_form.file_field :material %>
         <% end %>
       </li>
     <% end %>
