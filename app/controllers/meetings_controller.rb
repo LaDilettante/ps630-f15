@@ -14,6 +14,8 @@ class MeetingsController < ApplicationController
 
   def edit
     @meeting = Meeting.find(params[:id])
+    n = [0, 3 - @meeting.meeting_materials.count].max
+    n.times { @meeting.meeting_materials.new }
   end
 
   def create
