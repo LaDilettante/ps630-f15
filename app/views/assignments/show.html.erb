@@ -15,10 +15,10 @@
             link_to("Solution source code", @assignment.solution_source_code.url) %></li>
 </ul>
 
-<% if current_user.student? %>
+<% if !current_user.nil? && current_user.student? %>
   <% @student = current_user %>
   <%= link_to "Submit your work", new_student_homework_document_path(student_id: @student.id), class: "btn" %>
-<% elsif current_user.teacher? %>
+<% elsif !current_user.nil? && current_user.teacher? %>
   <% @teacher = current_user %>
   <%= link_to "Edit assignment", edit_assignment_path(@assignment), class: "btn" %>
 <% end %>
