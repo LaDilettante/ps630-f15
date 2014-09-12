@@ -55,7 +55,8 @@ class AssignmentsController < ApplicationController
     def assignment_params
       params.require(:assignment)
             .permit(:title, :body,
-                    :max_grade, :document, :source_code)
+                    :max_grade, :document, :source_code,
+                    :solution, :solution_source_code)
     end
 
     def turn_away_non_teacher
