@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi there, <%= @user.name %></h1>
+
+    <p>There is a <%= link_to "new assignment", assignment_url(@assignment) %> posted.</p>
+
+    <p><%= @assignment.title %>: <%= @assignment.body %></p>
+
+    <p>Deadline: <%= @assignment.deadline.strftime("%m/%d/%Y %H:%M") %></p>
+
+    <p>Have a great day! - Anh</p>
+  </body>
+</html>

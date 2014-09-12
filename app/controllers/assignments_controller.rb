@@ -9,6 +9,9 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new(assignment_params)
     @assignment.deadline = DateTime.strptime(params[:assignment][:deadline] + " Eastern Time (US & Canada)", "%m/%d/%Y %H:%M %Z").in_time_zone
     if @assignment.save
+      User.all.each do |user|
+        UserMailer.notify_new_assignment(@assignment, user).deliver!
+      end
       flash[:success] = "Assignment posted"
       redirect_to @assignment
     else

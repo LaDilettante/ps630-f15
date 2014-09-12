@@ -1,0 +1,11 @@
+Hi there, <%= @user.name %>
+====================================
+
+There is a <%= link_to "new assignment", assignment_url(@assignment) %> posted. 
+
+<%= @assignment.title %>: <%= @assignment.body %>
+
+Deadline: <%= @assignment.deadline.strftime("%m/%d/%Y %H:%M") %>
+
+Have a great day! - Anh
+

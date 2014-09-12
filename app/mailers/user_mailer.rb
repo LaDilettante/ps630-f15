@@ -25,6 +25,12 @@ class UserMailer < ActionMailer::Base
     mail(to: @submitter.email, subject: "Your grade for #{@assignment.title} is now available")
   end
 
+  def notify_new_assignment(assignment, user)
+    @assignment = assignment
+    @user = user
+    mail(to: user.email, subject: "New assignment posted")
+  end
+
   def notify_new_meeting(meeting, user)
     @meeting = meeting
     @user = user
