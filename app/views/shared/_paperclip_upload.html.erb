@@ -1,0 +1,7 @@
+<% if object.attachment.exists? %>
+  <%= link_to materials_form.object.material_file_name,
+              materials_form.object.material.url %>
+  <%= materials_form.label :_destroy, class: "checkbox inline" do %>
+    Remove attachment <%= materials_form.check_box :_destroy %>
+  <% end %>
+<% end %>
