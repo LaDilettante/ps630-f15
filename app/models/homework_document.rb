@@ -15,7 +15,7 @@ class HomeworkDocument < ActiveRecord::Base
 
   validates_attachment :ungraded_file, presence: true,
     size: { in: 0..10.megabytes }
-  before_ungraded_file_post_process :set_ungraded_file_content_type
+  # before_ungraded_file_post_process :set_ungraded_file_content_type
 
   validates_attachment :ungraded_file_source_code, presence: true,
     size: { in: 0..10.megabytes }
