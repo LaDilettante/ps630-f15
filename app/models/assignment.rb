@@ -21,8 +21,6 @@ class Assignment < ActiveRecord::Base
   validates_attachment :solution_source_code,
     size: { in: 0..10.megabytes }
 
-  before_save :default_values
-
   scope :closed,   -> { where("deadline < ?", 1.day.ago) }
   scope :open,     -> { where("deadline > ?", 1.day.ago) }
   scope :graded,   -> { where(graded: true) }
@@ -63,9 +61,5 @@ class Assignment < ActiveRecord::Base
 
     def set_solution_content_type
       self.solution.instance_write(:content_type, MIME::Types.type_for(self.solution_file_name).first.content_type.to_s)
-    end
-
-    def default_values
-      self.graded ||= false
     end
 end
