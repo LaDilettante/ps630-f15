@@ -87,6 +87,7 @@
     <tr>
       <td><%= ungraded_doc.assignment.title %></td>
       <td><%= link_to "Ungraded file", ungraded_doc.ungraded_file.url %></td>
+      <td><%= link_to "Ungraded file source code", ungraded_doc.ungraded_file_source_code.url %></td>
       <td><%= link_to "Grade", edit_student_homework_document_path(student_id: ungraded_doc.submitter_id, id: ungraded_doc.id), class: "btn" %></td>
     </tr>
   <% end %>
