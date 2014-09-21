@@ -32,6 +32,18 @@ class Assignment < ActiveRecord::Base
     Student.where("id IN (#{submitter_ids})", assignment_id: id)
   end
 
+  def Assignment.deadline_reminder
+    open.each do |assigment|
+      if assignment.deadline > Time.zone.now - 1.day
+        Student.all.each do |student|
+          unless student.submitted_homework_documents.map(&:assignment_id).include? assignment.id do
+            UserMailer.notify_closing_deadline(student, assignment).deliver!
+          end
+        end 
+      end
+    end
+  end
+
   def Assignment.grade_all
     closed.ungraded.each do |assignment|
       assignment.assign_homework_doc_to_grader  
@@ -48,7 +60,7 @@ class Assignment < ActiveRecord::Base
     grader_map_to_submitter.each do |grader, submitter|
       doc = submitter.submitted_homework_documents.where(assignment_id: id).last
       doc.update_attribute(:grader_id, grader.id)
-      UserMailer.notify_pending_grading(grader, self).deliver
+      UserMailer.notify_pending_grading(grader, self).deliver!
     end
     update_attribute(:graded, true)
   end

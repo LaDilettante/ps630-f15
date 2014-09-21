@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1>Hi there, <%= @student.name %>!</h1>
+    <p>
+      Friendly reminder: the next assignment is due within a day.<br>
+    </p>
+    <p>
+      The assignment is <%= link_to "here", @assignment.title %>.
+    </p>
+    
+    <p>Have a great day! - Anh</p>
+  </body>
+</html>

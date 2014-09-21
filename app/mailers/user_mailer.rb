@@ -12,6 +12,12 @@ class UserMailer < ActionMailer::Base
     mail(to: @user.email, subject: "Your profile setting has been changed")
   end
 
+  def notify_closing_deadline(student, assignment)
+    @student = student
+    @assignment = assignment
+    mail(to: @student.email, subject: "Reminder: Assignment deadline in 1 day")
+  end
+
   def notify_pending_grading(grader, assignment)
     @grader = grader
     @assignment = assignment
