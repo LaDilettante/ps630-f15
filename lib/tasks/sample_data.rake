@@ -17,6 +17,7 @@ namespace :db do
     end
   end
 
+  desc "Grade the first student (sample data)"
   task :grade_first_student => :environment do
     Student.first.submitted_homework_documents.each do |doc|
       doc.update_attribute(:grade, rand(100))

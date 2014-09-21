@@ -36,7 +36,7 @@ class Assignment < ActiveRecord::Base
     open.each do |assigment|
       if assignment.deadline > Time.zone.now - 1.day
         Student.all.each do |student|
-          unless student.submitted_homework_documents.map(&:assignment_id).include? assignment.id do
+          unless student.submitted_homework_documents.map(&:assignment_id).include? assignment.id
             UserMailer.notify_closing_deadline(student, assignment).deliver!
           end
         end 
