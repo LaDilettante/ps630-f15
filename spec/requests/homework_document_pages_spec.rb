@@ -38,7 +38,9 @@ describe "HomeworkDocumentPages" do
 
       describe "valid with graded file" do
         before do
-          fill_in "Grade", with: assignment.max_grade
+          fill_in "Grade",                       with: assignment.max_grade
+          attach_file "Graded file",             Rails.root + "spec/fixtures/documents/lab1.pdf"
+          attach_file "Graded file source code", Rails.root + "spec/fixtures/documents/lab1.Rnw"
           click_button "Submit grading"
         end
         it { should have_title "Profile" }

@@ -80,11 +80,11 @@ class HomeworkDocument < ActiveRecord::Base
 
     def grader_submitting_graded_file
       if !user_id.nil? && grader?(user_id)
-        unless graded_file.exists?
+        if graded_file_file_name.nil?
           errors.add(:graded_file, "must be uploaded. Your peer would appreciate your feedback")
         end
 
-        unless graded_file_source_code.exists?
+        if graded_file_source_code_file_name.nil?
           errors.add(:graded_file_source_code, "must be uploaded. Your peer would appreciate your feedback")
         end
       end
