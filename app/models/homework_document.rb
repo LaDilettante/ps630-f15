@@ -12,6 +12,8 @@ class HomeworkDocument < ActiveRecord::Base
   validates :assignment, presence: true
   validates :submitter, presence: true
   validates :grade, numericality: true, allow_nil: true
+  
+  validate :grade_smaller_than_max_grade, on: :update
 
   validates_attachment :ungraded_file, presence: true,
     size: { in: 0..10.megabytes }
@@ -68,5 +70,11 @@ class HomeworkDocument < ActiveRecord::Base
 
     def set_graded_file_content_type
       self.graded_file.instance_write(:content_type, MIME::Types.type_for(self.graded_file_file_name).first.content_type.to_s)
+    end
+
+    def grade_smaller_than_max_grade
+      if !grade.nil?
+        grade <= assignment.max_grade
+      end
     end
 end
