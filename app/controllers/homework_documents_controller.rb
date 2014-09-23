@@ -25,6 +25,7 @@ class HomeworkDocumentsController < ApplicationController
 
   def update
     @doc = HomeworkDocument.find(params[:id])
+    @doc.user_id = current_user.id
     if @doc.submitter?(current_user.id)
       submitter_update(@doc)
     elsif @doc.grader?(current_user.id)

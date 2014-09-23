@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140906015909) do
+ActiveRecord::Schema.define(version: 20140923162858) do
 
   create_table "assignments", force: true do |t|
     t.text     "title"
@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20140906015909) do
     t.float    "max_grade"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "graded"
+    t.boolean  "graded",                            default: false
     t.string   "document_file_name"
     t.string   "document_content_type"
     t.integer  "document_file_size"
@@ -64,6 +64,7 @@ ActiveRecord::Schema.define(version: 20140906015909) do
     t.string   "graded_file_source_code_content_type"
     t.integer  "graded_file_source_code_file_size"
     t.datetime "graded_file_source_code_updated_at"
+    t.integer  "user_id"
   end
 
   create_table "meeting_materials", force: true do |t|

@@ -24,12 +24,12 @@ class HomeworkDocument < ActiveRecord::Base
 
   validates_attachment :graded_file, 
     size: { in: 0..10.megabytes }
-  before_graded_file_post_process :set_graded_file_content_type
+  # before_graded_file_post_process :set_graded_file_content_type
 
   validates_attachment :graded_file_source_code,
     size: { in: 0..10.megabytes }
 
-
+  validate :grader_submitting_graded_file, on: :update
 
   def calculate_penalty
     time_late = created_at - assignment.deadline
@@ -43,7 +43,7 @@ class HomeworkDocument < ActiveRecord::Base
       # Get a 0 when late for more than a day
       self.penalty = 1
     end
-    save
+    save!
   end
 
   def final_grade
@@ -73,8 +73,20 @@ class HomeworkDocument < ActiveRecord::Base
     end
 
     def grade_smaller_than_max_grade
-      if !grade.nil?
-        grade <= assignment.max_grade
+      if !user_id.nil? && grader?(user_id) && !grade.nil? && grade > assignment.max_grade
+        errors.add(:grade, "can't be greater than the assignment's max grade")
+      end
+    end
+
+    def grader_submitting_graded_file
+      if !user_id.nil? && grader?(user_id)
+        unless graded_file.exists?
+          errors.add(:graded_file, "must be uploaded. Your peer would appreciate your feedback")
+        end
+
+        unless graded_file_source_code.exists?
+          errors.add(:graded_file_source_code, "must be uploaded. Your peer would appreciate your feedback")
+        end
       end
     end
 end

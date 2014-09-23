@@ -45,12 +45,12 @@
         <% end %>
       </td>
       <td>
-        <% if submission.graded_file.exists? || !submission.grade.nil? %>
+        <% if submission.graded_file.exists? && !submission.grade.nil? %>
           <%= link_to "Graded file", submission.graded_file.url %>
         <% end %>
       </td>
       <td>
-        <% if submission.graded_file_source_code.exists? || !submission.grade.nil? %>
+        <% if submission.graded_file_source_code.exists? && !submission.grade.nil? %>
           <%= link_to "Graded source code", submission.graded_file_source_code.url %>
         <% end %>
       </td>
