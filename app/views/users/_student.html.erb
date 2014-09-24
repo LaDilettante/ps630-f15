@@ -73,6 +73,7 @@
       <td><%= graded_doc.assignment.title %></td>
       <td><%= graded_doc.grade %></td>
       <td><%= link_to "Graded file", graded_doc.graded_file.url %></td>
+      <td><%= link_to "Re-grade", edit_student_homework_document_path(student_id: graded_doc.submitter_id, id: graded_doc.id), class: "btn" %></td>
     <% end %>
   </tr>
 </table>
