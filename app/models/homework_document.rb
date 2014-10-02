@@ -79,7 +79,10 @@ class HomeworkDocument < ActiveRecord::Base
     end
 
     def grader_submitting_graded_file
-      if !user_id.nil? && grader?(user_id)
+      # user.id not nil so that we have someone signed in
+      # grade.nil? make sure that this is the first time grading.
+      # in subsequent re-grading the grader can change grade without submitting file
+      if !user_id.nil? && grader?(user_id) && grade.nil?
         if graded_file_file_name.nil?
           errors.add(:graded_file, "must be uploaded. Your peer would appreciate your feedback")
         end
