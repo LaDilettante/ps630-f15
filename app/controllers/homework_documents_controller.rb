@@ -4,7 +4,7 @@ class HomeworkDocumentsController < ApplicationController
   def new
     @doc = HomeworkDocument.new(submitter_id: params[:student_id])
     @assignment_options = Assignment
-      .all.map{ |a| ["Num #{a.id}, title #{a.title}", a.id] }
+      .open.map{ |a| ["Num #{a.id}, title #{a.title}", a.id] }
   end
 
   def create
