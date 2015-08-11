@@ -24,6 +24,13 @@ class UserMailer < ActionMailer::Base
     mail(to: @grader.email, subject: "There is someone's homework waiting for you")
   end
 
+  def notify_available_comment(submitter, doc)
+    @submitter = submitter
+    @doc = doc
+    @assignment  = doc.assignment
+    mail(to: @submitter.email, subject: "Comments for #{@assignment.title} is now available")
+  end
+
   def notify_available_grade(submitter, doc)
     @submitter = submitter
     @doc = doc

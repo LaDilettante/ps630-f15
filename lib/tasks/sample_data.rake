@@ -15,6 +15,8 @@ namespace :db do
           ungraded_file_source_code: File.open(Rails.root + "spec/fixtures/documents/lab1.tex") )
       end
     end
+
+    1.times { FactoryGirl.create(:assignment, deadline: 1.day.from_now) } # Assignments that students have not submitted
   end
 
   desc "Grade the first student (sample data)"

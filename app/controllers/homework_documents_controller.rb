@@ -59,7 +59,7 @@ class HomeworkDocumentsController < ApplicationController
     def grader_update(doc)
       if doc.update_attributes(doc_grader_params)
         flash[:success] = "Grading submitted"
-        UserMailer.notify_available_grade(User.find(doc.submitter_id), doc).deliver
+        UserMailer.notify_available_comment(User.find(doc.submitter_id), doc).deliver
         redirect_to User.find(doc.grader_id)
       else
         flash.now[:error] = "Grading was not submitted"

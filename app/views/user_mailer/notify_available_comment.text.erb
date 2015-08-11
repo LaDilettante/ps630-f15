@@ -1,0 +1,8 @@
+Hi there, <%= @submitter.name %>
+========================================
+
+A fellow classmate has submitted their comments for your work on Assignment <%= @assignment.id %>, "<%= @assignment.title %>".
+    
+You can see your commented homework at <%= link_to "your profile page", user_url(@submitter) %>. 
+
+Have a great day!

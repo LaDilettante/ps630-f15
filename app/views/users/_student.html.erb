@@ -68,7 +68,7 @@
     <th scope="col">Grade</th>
     <th scope="col">Attachment</th>
   </tr>
-  <% @student.returned_homework_documents.where("grade is NOT NULL").each do |graded_doc| %>
+  <% @student.returned_homework_documents.commented.each do |graded_doc| %>
     <tr>
       <td><%= graded_doc.assignment.title %></td>
       <td><%= graded_doc.grade %></td>
@@ -87,7 +87,7 @@
     <th scope="col">Assignment title</th>
     <th scope="col">Attachment</th>
   </tr>
-  <% @student.returned_homework_documents.where("grade is NULL").each do |ungraded_doc| %>
+  <% @student.returned_homework_documents.uncommented.each do |ungraded_doc| %>
     <tr>
       <td><%= ungraded_doc.assignment.title %></td>
       <td><%= link_to "Ungraded file", ungraded_doc.ungraded_file.url %></td>
