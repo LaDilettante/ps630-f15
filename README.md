@@ -25,6 +25,7 @@
 
 ## Setting up:
 1. `bundle install` > `bundle update`
+2. `rake db:migrate` > `rake db:populate` (`db:populate` to populate database with mock data)
 
 1. `heroku create` > `git push heroku master` > `heroku rename new-name`
 2. `heroku rake db:migrate`
@@ -34,3 +35,9 @@
 5. `heroku addons:create newrelic`. `Settings > Availability Monitoring > Enter URL`
 
 1. Change site title: `application_helper.rb` > `def site_title`
+2. Late penalty: `homework_document.rb` > `def calculate_penalty`
+
+## Rails utility
+
+`Student.find_by(name: "Student 1").submitted_homework_documents.map(&:grade)`
+`heroku run logs -t`
