@@ -22,3 +22,15 @@
 ## Add-ons:
 * Email: SendGrid
 * Ping to keep dyno live: NewRelic
+
+## Setting up:
+1. `bundle install` > `bundle update`
+
+1. `heroku create` > `git push heroku master` > `heroku rename new-name`
+2. `heroku rake db:migrate`
+3. `heroku addons:create sendgrid`
+    - change host in `config.action_mailer.default_url_options = { host: "polsci630.herokuapp.com" }`
+4. `heroku addons:create scheduler`
+5. `heroku addons:create newrelic`. `Settings > Availability Monitoring > Enter URL`
+
+1. Change site title: `application_helper.rb` > `def site_title`
