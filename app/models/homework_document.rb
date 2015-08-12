@@ -44,11 +44,11 @@ class HomeworkDocument < ActiveRecord::Base
       # update_attribute(:penalty, 0)
       self.penalty = 0
     when time_late > 0 && time_late <= 1.day
-      # After 1 day subtract 1 letter grade (3 pts out of 16)
-      self.penalty = 3
+      # After 1 day subtract 1 letter grade (4 pts out of 16)
+      self.penalty = 4
     when time_late > 1.day && time_late <= 2.days
-      # After 2 days subtract 2 letter grade (6 pts out of 16)
-      self.penalty = 6
+      # After 2 days subtract 2 letter grade (8 pts out of 16)
+      self.penalty = 8
     when time_late > 2.days
       # Over 2 days, subtract all points
       self.penalty = assignment.max_grade
