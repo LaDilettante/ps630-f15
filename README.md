@@ -37,7 +37,7 @@ Heroku setup
 3. `heroku addons:create sendgrid`
     - change host in `config.action_mailer.default_url_options = { host: "polsci630.herokuapp.com" }`
 4. `heroku addons:create scheduler`
-    - Scheduling job: `https://devcenter.heroku.com/articles/scheduler#scheduling-jobs`
+    - Scheduling job: https://devcenter.heroku.com/articles/scheduler#scheduling-jobs
     - `rake remind_deadline`
     - `rake assign_grading`
 5. `heroku addons:create newrelic`. `Settings > Availability Monitoring > Enter URL`
