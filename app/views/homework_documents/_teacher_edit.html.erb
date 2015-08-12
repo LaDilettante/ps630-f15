@@ -7,12 +7,9 @@
                                                id: @doc.id),
           html: { multipart: true } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
-
-      <%= f.label :graded_file %>
-      <%= f.file_field :graded_file %>
-
-      <%= f.label :graded_file_source_code %>
-      <%= f.file_field :graded_file_source_code %>
+      
+      <%= f.label :grade %>
+      <%= f.number_field :grade %>
 
       <%= f.submit "Submit grading", class: "btn btn-large" %>
     <% end %>

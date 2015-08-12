@@ -4,4 +4,6 @@
   <%= render "submitter_edit" %>
 <% elsif @doc.grader?(current_user.id) %>
   <%= render "grader_edit" %>
+<% elsif current_user.teacher? %>
+  <%= render "teacher_edit" %>
 <% end %>

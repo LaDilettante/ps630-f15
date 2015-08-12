@@ -1,0 +1,55 @@
+<% provide(:title, 'All assignments') %>
+<h1>Homeworks to be graded</h1>
+
+<div class="row">
+<div class="span12" >
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Assignment title</th>
+    <th scope="col">Submitter / Commenter</th>
+    <th scope="col">Grade</th>
+    <th scope="col">Attachment</th>
+  </tr>
+  <% @homework_documents.commented.ungraded.each do |hw| %>
+    <tr>
+      <td><%= hw.assignment.title %></td>
+      <td><%= hw.submitter.name %> / <%= hw.grader.name %></td>
+      <td><%= hw.grade %></td>
+      <td><%= link_to "Ungraded", hw.ungraded_file.url %></td>
+      <td><%= link_to "Ungraded code", hw.ungraded_file_source_code.url %></td> 
+      <td><%= link_to "Graded", hw.graded_file.url %></td>
+      <td><%= link_to "Graded code", hw.graded_file_source_code.url %></td>
+      <td><%= link_to "Grade", edit_student_homework_document_path(student_id: hw.submitter_id, id: hw.id), class: "btn" %></td>
+    <% end %>
+  </tr>
+</table>
+</div>
+</div>
+
+<h1>Graded homeworks</h1>
+
+<div class="row">
+<div class="span12" >
+<table class="table table-hover">
+  <tr>
+    <th scope="col">Assignment title</th>
+    <th scope="col">Submitter / Commenter</th>
+    <th scope="col">Grade</th>
+    <th scope="col">Attachment</th>
+  </tr>
+  <% @homework_documents.graded.each do |hw| %>
+    <tr>
+      <td><%= hw.assignment.title %></td>
+      <td><%= hw.submitter.name %> / <%= hw.grader.name %></td>
+      <td><%= hw.grade %></td>
+      <td><%= link_to "Ungraded", hw.ungraded_file.url %></td>
+      <td><%= link_to "Ungraded code", hw.ungraded_file_source_code.url %></td> 
+      <td><%= link_to "Graded", hw.graded_file.url %></td>
+      <td><%= link_to "Graded code", hw.graded_file_source_code.url %></td>
+      <td><%= link_to "Re-grade", edit_student_homework_document_path(student_id: hw.submitter_id, id: hw.id), class: "btn" %></td>
+    <% end %>
+  </tr>
+</table>
+</div>
+</div>
+

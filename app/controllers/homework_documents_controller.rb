@@ -1,5 +1,6 @@
 class HomeworkDocumentsController < ApplicationController
   before_action :stop_submitter_late_edit, only: [:edit, :update]
+  before_action :turn_away_non_teacher, only: [:index]
   
   def new
     @doc = HomeworkDocument.new(submitter_id: params[:student_id])
@@ -30,7 +31,13 @@ class HomeworkDocumentsController < ApplicationController
       submitter_update(@doc)
     elsif @doc.grader?(current_user.id)
       grader_update(@doc)
+    elsif current_user.teacher?
+      teacher_update(@doc)
     end
+  end
+
+  def index
+    @homework_documents = HomeworkDocument.all
   end
 
   private
@@ -43,7 +50,12 @@ class HomeworkDocumentsController < ApplicationController
 
     def doc_grader_params
       params.require(:homework_document)
-            .permit(:grade, :graded_file, :graded_file_source_code)
+            .permit(:graded_file, :graded_file_source_code)
+    end
+
+    def doc_teacher_params
+      params.require(:homework_document)
+            .permit(:grade)
     end
 
     def submitter_update(doc)
@@ -60,7 +72,18 @@ class HomeworkDocumentsController < ApplicationController
       if doc.update_attributes(doc_grader_params)
         flash[:success] = "Grading submitted"
         UserMailer.notify_available_comment(User.find(doc.submitter_id), doc).deliver
-        redirect_to User.find(doc.grader_id)
+        redirect_to current_user
+      else
+        flash.now[:error] = "Grading was not submitted"
+        render :edit
+      end
+    end
+
+    def teacher_update(doc)
+      if doc.update_attributes(doc_teacher_params)
+        flash[:success] = "Grading submitted"
+        UserMailer.notify_available_grade(User.find(doc.submitter_id), doc).deliver
+        redirect_to homework_documents_path
       else
         flash.now[:error] = "Grading was not submitted"
         render :edit
@@ -69,9 +92,13 @@ class HomeworkDocumentsController < ApplicationController
 
     def stop_submitter_late_edit
       doc = HomeworkDocument.find(params[:id])
-      if (Time.now > doc.assignment.deadline + 1.day) & !current_user?(doc.grader)
+      if (Time.now > doc.assignment.deadline + 1.day) && !current_user?(doc.grader) && !current_user.teacher?
         flash[:error] = "You are not allowed to edit this document"
         redirect_to root_path
       end
+    end
+
+    def turn_away_non_teacher
+      redirect_to root_path, notice: "You are not allowed to access that link" unless current_user.teacher?
     end
 end

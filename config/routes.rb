@@ -19,11 +19,13 @@ Polsci630::Application.routes.draw do
 
   # User related
   resources :users
-  get '/users/show_image' => 'users#show_image'
   resources :students, controller: 'users', only: [:show] do
     resources :homework_documents, only: [:new, :create, :edit, :update]
   end
   resources :teachers, controller: 'users', only: [:show]
+
+  # HomeworkDocument related
+  resources :homework_documents, only: [:index]
 
   resources :sessions, only: [:create]
   # The priority is based upon order of creation: first created -> highest priority.
