@@ -49,7 +49,10 @@ class HomeworkDocumentsController < ApplicationController
     end
 
     def doc_grader_params
-      params.require(:homework_document)
+      # Use fetch to handle when user submit blank forms.
+      # In that case, the param won't include the homework_document hash
+      # http://stackoverflow.com/questions/31969508/form-for-does-not-pass-the-required-value-when-user-submits-blank-form
+      params.fetch(:homework_document, {})
             .permit(:graded_file, :graded_file_source_code)
     end
 
