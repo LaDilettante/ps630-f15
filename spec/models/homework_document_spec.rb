@@ -61,18 +61,18 @@ describe HomeworkDocument do
         hw.save!
       end
 
-      specify { expect(hw.reload.penalty).to eq 0.1 }
+      specify { expect(hw.reload.penalty).to eq 4 }
     end
 
     describe "late submission more than a day" do
       before do
         assignment.deadline = Time.now
         assignment.save!
-        hw.created_at = 2.days.from_now
+        hw.created_at = 1.day.from_now + 1.second
         hw.save!
       end
 
-      specify { expect(hw.reload.penalty).to eq 1 }
+      specify { expect(hw.reload.penalty).to eq 8 }
     end
   end
 
