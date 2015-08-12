@@ -26,10 +26,12 @@
 ## Setting up:
 
 Local setup
+
 1. `bundle install` > `bundle update`
 2. `rake db:migrate` > `rake db:populate` (`db:populate` to populate database with mock data)
 
 Heroku setup
+
 1. `heroku create` > `git push heroku master` > `heroku rename new-name`
 2. `heroku rake db:migrate`
 3. `heroku addons:create sendgrid`
@@ -41,6 +43,7 @@ Heroku setup
 5. `heroku addons:create newrelic`. `Settings > Availability Monitoring > Enter URL`
 
 Site customization
+
 1. Change site title: `application_helper.rb` > `def site_title`
 2. Late penalty: `homework_document.rb` > `def calculate_penalty`
 
