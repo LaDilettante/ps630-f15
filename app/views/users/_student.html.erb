@@ -25,7 +25,6 @@
     <th scope="col">Submission date</th>
     <th scope="col">Deadline</th>
     <th scope="col">Grade / Penalty / Final grade</th>
-    <th scope="col">Content</th>
   </tr>
   <% @student.submitted_homework_documents.each do |submission| %>
     <tr>
@@ -33,7 +32,6 @@
       <td><%= submission.created_at %></td>
       <td><%= submission.assignment.deadline %></td>
       <td><%= submission.grade.nil? ? "NA" : ("%.1f" % submission.grade) %> / <%= "%.2f" % submission.penalty %> / <%= submission.grade.nil? ? "NA" : ("%.1f" % submission.final_grade) %></td>
-      <td><%= submission.content %></td>
       <td>
         <% if submission.ungraded_file.exists? %>
           <%= link_to "Ungraded", submission.ungraded_file.url %>
@@ -45,12 +43,12 @@
         <% end %>
       </td>
       <td>
-        <% if submission.graded_file.exists? && !submission.grade.nil? %>
+        <% if submission.graded_file.exists? %>
           <%= link_to "Graded", submission.graded_file.url %>
         <% end %>
       </td>
       <td>
-        <% if submission.graded_file_source_code.exists? && !submission.grade.nil? %>
+        <% if submission.graded_file_source_code.exists? %>
           <%= link_to "Graded code", submission.graded_file_source_code.url %>
         <% end %>
       </td>

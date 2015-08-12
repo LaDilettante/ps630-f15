@@ -29,7 +29,7 @@ class HomeworkDocument < ActiveRecord::Base
   validates_attachment :graded_file_source_code,
     size: { in: 0..10.megabytes }
 
-  validate :grader_submitting_graded_file, on: :update
+  validate :grader_submitting_graded_file, on: :update, if: :current_user_is_grader?
 
   scope :ungraded, -> { where("grade is NULL") }
   scope :graded,   -> { where("grade IS NOT NULL") }
@@ -39,14 +39,19 @@ class HomeworkDocument < ActiveRecord::Base
   def calculate_penalty
     time_late = created_at - assignment.deadline
     case
+    # use update_attribute to bypass on: :update validation
     when time_late < 0
+      # update_attribute(:penalty, 0)
       self.penalty = 0
     when time_late > 0 && time_late <= 1.day
-      # After each 2 hours subtract 5%
-      self.penalty = (time_late / 2.hours).to_i * 0.05
-    when time_late > 1.day
-      # Get a 0 when late for more than a day
-      self.penalty = 1
+      # After 1 day subtract 1 letter grade (3 pts out of 16)
+      self.penalty = 3
+    when time_late > 1.day && time_late <= 2.days
+      # After 2 days subtract 2 letter grade (6 pts out of 16)
+      self.penalty = 6
+    when time_late > 2.days
+      # Over 2 days, subtract all points
+      self.penalty = assignment.max_grade
     end
     save!
   end
@@ -55,7 +60,7 @@ class HomeworkDocument < ActiveRecord::Base
     if grade.nil?
       return nil
     else
-      return grade * (1 - penalty)
+      return grade - penalty
     end
   end
 
@@ -65,6 +70,10 @@ class HomeworkDocument < ActiveRecord::Base
 
   def grader?(user_id)
     self.grader_id == user_id
+  end
+
+  def current_user_is_grader?
+    !grader_id.nil? && grader?(user_id)
   end
 
   private

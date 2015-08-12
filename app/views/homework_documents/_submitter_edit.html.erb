@@ -8,7 +8,7 @@
           html: { multipart: true } do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
       
-      <%= f.label :content %>
+      <%= f.label :content, "Notes (Optional)" %>
       <%= f.text_area :content %>
 
       <%= f.label :ungraded_file %>
