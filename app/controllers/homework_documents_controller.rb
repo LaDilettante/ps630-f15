@@ -1,6 +1,6 @@
 class HomeworkDocumentsController < ApplicationController
   before_action :stop_submitter_late_edit, only: [:edit, :update]
-  before_action :turn_away_non_teacher, only: [:index]
+  before_action :force_user_to_sign_in, :turn_away_non_teacher, only: [:index]
   
   def new
     @doc = HomeworkDocument.new(submitter_id: params[:student_id])
@@ -99,6 +99,10 @@ class HomeworkDocumentsController < ApplicationController
         flash[:error] = "You are not allowed to edit this document"
         redirect_to root_path
       end
+    end
+
+    def force_user_to_sign_in
+      redirect_to signin_path, notice: "Please sign in" unless signed_in?
     end
 
     def turn_away_non_teacher
