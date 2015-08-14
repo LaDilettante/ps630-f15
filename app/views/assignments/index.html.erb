@@ -13,7 +13,7 @@
     <tr>
       <td><%= link_to assignment.title, assignment %></td>
       <td><%= assignment.deadline.strftime("%m/%d/%Y") %></td>
-      <td><%= assignment.deadline < 1.day.ago ? "Closed" : "Open" %>, 
+      <td><%= assignment.deadline < 2.day.ago ? "Closed" : "Open" %>, 
           <%= assignment.graded ? "Graded" : "Ungraded" %></td>
     </tr>
   <% end %>
