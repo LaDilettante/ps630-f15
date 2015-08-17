@@ -1,3 +1,5 @@
+<% provide(:title, "Submit your homework") %>
+
 <h1>Submit your homework</h1>
 
 <div class="container">
@@ -18,6 +20,7 @@
       <%= f.label :ungraded_file_source_code %>
       <%= f.file_field :ungraded_file_source_code %>
 
+      <br>
       <%= f.submit "Submit homework", class: "btn btn-primary" %>
     <% end %>
   </div>

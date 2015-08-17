@@ -12,22 +12,23 @@ class HomeworkDocument < ActiveRecord::Base
   validates :assignment, presence: true
   validates :submitter, presence: true
   validates :grade, numericality: true, allow_nil: true
-  
+
+  validate :cannot_submit_more_than_once_for_same_assignment, on: :create
   validate :grade_smaller_than_max_grade, on: :update
 
-  validates_attachment :ungraded_file, presence: true,
-    size: { in: 0..10.megabytes }
+  validates_attachment_presence :ungraded_file, :message => "(.pdf) must be attached."
+  validates_attachment :ungraded_file, size: { in: 0..5.megabytes }
   # before_ungraded_file_post_process :set_ungraded_file_content_type
 
-  validates_attachment :ungraded_file_source_code, presence: true,
-    size: { in: 0..10.megabytes }
+  validates_attachment_presence :ungraded_file_source_code, :message => "Your code (.Rnw) must be attached."
+  validates_attachment :ungraded_file_source_code, size: { in: 0..5.megabytes }
 
   validates_attachment :graded_file, 
-    size: { in: 0..10.megabytes }
+    size: { in: 0..5.megabytes }
   # before_graded_file_post_process :set_graded_file_content_type
 
   validates_attachment :graded_file_source_code,
-    size: { in: 0..10.megabytes }
+    size: { in: 0..5.megabytes }
 
   validate :grader_submitting_graded_file, on: :update, if: :current_user_is_grader?
 
@@ -102,6 +103,13 @@ class HomeworkDocument < ActiveRecord::Base
         if graded_file_source_code_file_name.nil?
           errors.add(:graded_file_source_code, "must be uploaded. Your peer would appreciate your feedback")
         end
+      end
+    end
+
+    def cannot_submit_more_than_once_for_same_assignment
+      return if submitter.nil? || assignment.nil?
+      if submitter.submitted_homework_documents.map(&:assignment).map(&:id).include?(assignment.id)
+        errors.add(:base, "You cannot submit to an assignment more than once. Please edit your existing submission instead")
       end
     end
 end

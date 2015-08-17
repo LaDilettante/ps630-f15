@@ -18,6 +18,7 @@ namespace :db do
 
     # Assignments that students have not submitted
     1.times { FactoryGirl.create(:assignment, deadline: 1.day.from_now) } 
+    1.times { FactoryGirl.create(:assignment, deadline: 2.day.from_now) } 
   end
 
   desc "Grade the first student (sample data)"
