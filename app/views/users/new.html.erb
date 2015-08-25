@@ -6,7 +6,6 @@
     <%= form_for @user, as: :user, url: users_path, method: 'POST' do |f| %>
       <%#= @user.becomes(User) is equivalent with @user, as: :user %>
       <%= render 'shared/error_messages', object: f.object %>
-      <%= debug f.object.errors %>
       <%= f.label :type %>
       <%= f.select :type, @type_options %>
 
