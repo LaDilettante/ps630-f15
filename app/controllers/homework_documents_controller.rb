@@ -61,7 +61,7 @@ class HomeworkDocumentsController < ApplicationController
 
     def doc_teacher_params
       params.require(:homework_document)
-            .permit(:grade)
+            .permit(:grade, :graded_file, :graded_file_source_code)
     end
 
     def submitter_update(doc)

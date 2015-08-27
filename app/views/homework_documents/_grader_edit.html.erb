@@ -9,9 +9,17 @@
       <%= render 'shared/error_messages', object: f.object %>
 
       <%= f.label :graded_file %>
+      <% if f.object.ungraded_file.exists? %>
+        <%= link_to f.object.graded_file_file_name,
+                    f.object.graded_file.url %>
+      <% end %>
       <%= f.file_field :graded_file %>
 
       <%= f.label :graded_file_source_code %>
+      <% if f.object.ungraded_file_source_code.exists? %>
+        <%= link_to f.object.graded_file_source_code_file_name,
+                    f.object.graded_file_source_code.url %>
+      <% end %>
       <%= f.file_field :graded_file_source_code %>
 
       <%= f.submit "Submit grading", class: "btn btn-large" %>
