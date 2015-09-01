@@ -1,8 +1,10 @@
 Get excited, <%= @grader.name %>!
 ======================================
 
-You have been assigned to comment on a classmate's homework. We TA's will assign the grade, taking into account your comments.
+You have been assigned to comment on a classmate's homework. We TAs will assign the grade, taking into account your comments.
 
-This time we grade assignment "<%= @assignment.title %>".
+This time we grade assignment "<%= @assignment.title %>". <%= link_to "The solution is posted here.", assignment_url(@assignment) %>
+
+Remember to comment (in red) directly into the submitted source code so that your comments is next to the work done.
 
 I hope you learn a lot from reading your colleague's work. Have a great day!

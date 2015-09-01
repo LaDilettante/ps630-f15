@@ -21,8 +21,8 @@ class Assignment < ActiveRecord::Base
   validates_attachment :solution_source_code,
     size: { in: 0..10.megabytes }
 
-  scope :closed,   -> { where("deadline < ?", 2.days.ago) }
-  scope :open,     -> { where("deadline > ?", 2.days.ago) }
+  scope :closed,   -> { where("deadline < ?", 1.hour.ago) }
+  scope :open,     -> { where("deadline > ?", 1.hour.ago) }
   scope :graded,   -> { where(graded: true) }
   scope :ungraded, -> { where(graded: false) }
 
