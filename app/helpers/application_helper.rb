@@ -19,4 +19,8 @@ module ApplicationHelper
     correct_datetime = Time.zone.parse(datetime_with_wrong_zone.strftime('%Y-%m-%d %H:%M:%S'))
     correct_datetime
   end
+
+  def time_format(datetime)
+    datetime.strftime('%Y-%m-%d %H:%M') unless datetime.blank?
+  end
 end

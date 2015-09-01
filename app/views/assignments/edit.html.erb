@@ -13,7 +13,8 @@
       <%= f.text_area :body %>
 
       <%= f.label :deadline %>
-      <%= f.text_field :deadline, class: "datetimepicker" %>
+      <%= f.text_field :deadline, value: time_format(f.object.deadline), 
+                                  class: "datetimepicker" %>
 
       <%= f.label :max_grade %>
       <%= f.number_field :max_grade %>
