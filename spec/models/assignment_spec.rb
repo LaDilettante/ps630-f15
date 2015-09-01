@@ -31,12 +31,12 @@ describe Assignment do
     let(:closed) { FactoryGirl.create(:assignment, deadline: 61.minutes.ago) }
     let(:open) { FactoryGirl.create(:assignment, deadline: 59.minutes.ago) }
 
-    describe "closed if past deadline for more than 2 day" do
+    describe "closed if past deadline for more than 1 hour" do
       specify { expect(Assignment.closed).to include(closed) }
       specify { expect(Assignment.closed).not_to include(open) }
     end
 
-    describe "open if not past deadline for more than 2 day" do
+    describe "open if not past deadline for more than 1 hour" do
       specify { expect(Assignment.open).not_to include(closed) }
       specify { expect(Assignment.open).to include(open) }
     end
