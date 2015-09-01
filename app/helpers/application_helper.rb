@@ -14,7 +14,7 @@ module ApplicationHelper
   end
 
   def parse_time_with_correct_zone(input_string)
-    input_format = "%m/%d/%Y %H:%M"
+    input_format = "%Y-%m-%d %H:%M"
     datetime_with_wrong_zone = DateTime.strptime(input_string, input_format)
     correct_datetime = Time.zone.parse(datetime_with_wrong_zone.strftime('%Y-%m-%d %H:%M:%S'))
     correct_datetime
