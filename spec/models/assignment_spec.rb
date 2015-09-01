@@ -28,8 +28,8 @@ describe Assignment do
   end
 
   describe "can be listed as" do
-    let(:closed) { FactoryGirl.create(:assignment, deadline: 49.hours.ago) }
-    let(:open) { FactoryGirl.create(:assignment, deadline: 23.hours.ago) }
+    let(:closed) { FactoryGirl.create(:assignment, deadline: 61.minutes.ago) }
+    let(:open) { FactoryGirl.create(:assignment, deadline: 59.minutes.ago) }
 
     describe "closed if past deadline for more than 2 day" do
       specify { expect(Assignment.closed).to include(closed) }
