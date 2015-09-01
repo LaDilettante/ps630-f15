@@ -10,7 +10,7 @@
     <th scope="col">Grade</th>
     <th scope="col">Attachment</th>
   </tr>
-  <% @homework_documents.ungraded.each do |hw| %>
+  <% @homework_documents.ungraded.order("id DESC").each do |hw| %>
     <tr>
       <td><%= hw.assignment.title %></td>
       <td><%= hw.submitter.name %> / <%= hw.grader.name %></td>
