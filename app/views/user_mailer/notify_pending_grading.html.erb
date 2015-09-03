@@ -9,13 +9,13 @@
       You have been assigned to comment on a classmate's homework. We TAs will assign the grade, taking into account your comments<br>
     </p>
     <p>
-      This time we grade assignment "<%= @assignment.title %>". <%= link_to "The solution is posted here.", assignment_url(@assignment) %>
+      This time we grade assignment "<%= @assignment.title %>". <%= link_to "The solution is posted here.", assignment_url(@assignment) %>. The ungraded submission is posted on your <%= link_to "Work Station", user_url(@grader) %>.
     </p>
 
     <p>
       Remember to comment (in red) directly into the submitted source code so that your comments is next to the work done.
     </p>
 
-    <p>I hope you learn a lot from reading your colleague's work. Have a great day!</p>
+    <p>I hope you learn a lot from reading your colleague's work. Have a great day! - Anh</p>
   </body>
 </html>
