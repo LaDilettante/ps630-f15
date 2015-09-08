@@ -10,10 +10,10 @@
     <th scope="col">Grade</th>
     <th scope="col">Attachment</th>
   </tr>
-  <% @homework_documents.closed.ungraded.order("id DESC").each do |hw| %>
+  <% @homework_documents.ungraded.order("id DESC").each do |hw| %>
     <tr>
       <td><%= hw.assignment.title %></td>
-      <td><%= hw.submitter.name %> / <%= hw.grader.name %></td>
+      <td><%= hw.submitter.name %> / <%= hw.grader.name unless hw.grader.nil? %></td>
       <td><%= hw.grade %></td>
       <td><%= link_to "Ungraded", hw.ungraded_file.url %></td>
       <td><%= link_to "Ungraded code", hw.ungraded_file_source_code.url %></td> 
