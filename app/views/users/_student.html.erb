@@ -7,7 +7,7 @@
 <%= content_tag "div", id: "grade_scatterplot", class: "span6",
   data: { :submissions => 
     @student.submitted_homework_documents.map { 
-      |sub| [sub.assignment.title, sub.grade, (sub.assignment.deadline - sub.created_at) / 3600 ] 
+      |sub| [sub.assignment.title, sub.grade, (sub.created_at - sub.assignment.deadline) / 3600 ] 
     }
   } do %>
 <% end %>
