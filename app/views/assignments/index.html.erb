@@ -9,7 +9,7 @@
     <th scope="col">Deadline</th>
     <th scope="col">Status</th>
   </tr>
-  <% @assignments.each do |assignment| %>
+  <% @assignments.order("id ASC").each do |assignment| %>
     <tr>
       <td><%= link_to assignment.title, assignment %></td>
       <td><%= assignment.deadline.strftime("%m/%d/%Y %H:%M") %></td>

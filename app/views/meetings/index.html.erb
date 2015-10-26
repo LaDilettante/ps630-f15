@@ -10,7 +10,7 @@
     <th scope="col">Time</th>
     <th scope="col">Materials</th>
   </tr>
-  <% @meetings.each do |meeting| %>
+  <% @meetings.order("id ASC").each do |meeting| %>
     <tr>
       <td><%= link_to meeting.title, meeting %></td>
       <td><%= meeting.time.strftime("%m/%d/%Y %H:%M %Z") %></td>
