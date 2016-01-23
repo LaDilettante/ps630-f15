@@ -7,6 +7,10 @@
     <%= form_for @user, as: :user, url: user_path(@user.id) do |f| %>
       <%= render 'shared/error_messages', object: f.object %>
 
+      <%= f.label :is_active do %>
+        I want to actively enrolled <%= f.check_box :is_active, class: "checkbox inline" %>
+      <% end %>
+
       <%= f.label :name %>
       <%= f.text_field :name %>
 
@@ -16,7 +20,7 @@
       <%= f.label :password %>
       <%= f.password_field :password %>
 
-      <%= f.label :password_confirmation, "Confirmation" %>
+      <%= f.label :password_confirmation, "Password Confirmation" %>
       <%= f.password_field :password_confirmation %>
 
       <%= f.submit "Save changes", class: "btn btn-large" %>

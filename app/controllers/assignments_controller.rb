@@ -9,7 +9,7 @@ class AssignmentsController < ApplicationController
     @assignment = Assignment.new(assignment_params)
     @assignment.deadline = parse_time_with_correct_zone(params[:assignment][:deadline])
     if @assignment.save
-      User.all.each do |user|
+      User.all.active.each do |user|
         UserMailer.notify_new_assignment(@assignment, user).deliver!
       end
       flash[:success] = "Assignment posted"

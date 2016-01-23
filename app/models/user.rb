@@ -11,6 +11,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  scope :active, -> { where("is_active is TRUE") }
+
   def User.new_raw_token
     SecureRandom.urlsafe_base64
   end
