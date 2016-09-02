@@ -61,3 +61,5 @@ Site customization
 
 - `Student.find_by(name: "Student 1").submitted_homework_documents.map(&:grade)`
 - `heroku run logs -t`
+- `Student.all.map(&:name)`
+- `Teacher.where(name: "Dahyun Choi").first.update_attribute(:type, "Student")`
