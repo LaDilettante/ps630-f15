@@ -42,12 +42,12 @@ Heroku setup
     - `rake assign_grading`
 5. `heroku addons:create newrelic`. `Settings > Availability Monitoring > Enter URL`
 6. https://devcenter.heroku.com/articles/paperclip-s3
-
-```$ heroku config:set S3_BUCKET_NAME=your_bucket_name
+Add S3 Storage for paperclip upload
+```
+$ heroku config:set S3_BUCKET_NAME=your_bucket_name
 $ heroku config:set AWS_ACCESS_KEY_ID=your_access_key_id
 $ heroku config:set AWS_SECRET_ACCESS_KEY=your_secret_access_key
 ```
-
 7. `heroku pg:backups schedule DATABASE_URL --at '03:00 America/New_York'`
     - heroku pg:backups
     - heroku pg:backups schedule
@@ -62,4 +62,4 @@ Site customization
 - `Student.find_by(name: "Student 1").submitted_homework_documents.map(&:grade)`
 - `heroku run logs -t`
 - `Student.all.map(&:name)`
-- `Teacher.where(name: "Dahyun Choi").first.update_attribute(:type, "Student")`
+- `Teacher.where(name: "Sun Choi").first.update_attribute(:type, "Student")`
