@@ -60,6 +60,7 @@ Site customization
 ## Rails utility
 
 - `Student.find_by(name: "Student 1").submitted_homework_documents.map(&:grade)`
-- `heroku run logs -t`
+- `heroku logs -t`
 - `Student.all.map(&:name)`
 - `Teacher.where(name: "Sun Choi").first.update_attribute(:type, "Student")`
+- `HomeworkDocument.where("updated_at < ?", Time.now - 1.month)`
